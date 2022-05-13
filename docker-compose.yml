@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  pubsub_emulator:
+    image: messagebird/gcloud-pubsub-emulator:latest
+    ports:
+      - "8681:8681"
+    environment:
+      - PUBSUB_PROJECT1=test-project,topic1:topic1-sub
+
