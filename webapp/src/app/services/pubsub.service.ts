@@ -22,6 +22,14 @@ export class PubsubService {
   listSubscriptions() {
     return this.http.get<{ subscriptions: Subscription[] }>(`${this.host}/v1/projects/${this.project_id}/subscriptions`).pipe(map(incoming => incoming.subscriptions))
   }
+
+  fetchMessages(subPath: string, maxMessages: number) {
+    return this.http
+      .post<{ receivedMessages: ReceivedMessage[] }>(
+        `${this.host}/v1/${subPath}:pull`,
+        { returnImmediately: true, maxMessages }
+      ).pipe(map(incoming => incoming.receivedMessages ?? []))
+  }
 }
 
 export interface Topic {
@@ -35,3 +43,16 @@ export interface Subscription {
   topic: string
 }
 
+export interface ReceivedMessage {
+  ackId: string
+  message: PubsubMessage
+  deliveryAttempt: number
+}
+
+export interface PubsubMessage {
+  data: string
+  attributes: { [key: string]: string }
+  messageId: string
+  publishTime: string
+  orderingKey: string
+}

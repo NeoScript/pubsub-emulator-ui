@@ -8,12 +8,14 @@ import { TopicsComponent } from './components/topics/topics.component';
 
 import {HttpClientModule} from '@angular/common/http';
 import { IndexComponent } from './components/index/index.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopicsComponent,
-    IndexComponent
+    IndexComponent,
+    SubscriptionsComponent
   ],
   imports: [
     BrowserModule,

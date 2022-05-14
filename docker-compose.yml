@@ -8,3 +8,10 @@ services:
     environment:
       - PUBSUB_PROJECT1=test-project,topic1:topic1-sub
 
+  pubsub-emulator-ui:
+    image: echocode/gcp-pubsub-emulator-ui:latest
+    ports:
+      - "8680:8680"
+    environment:
+      - PUBSUB_EMULATOR_HOST=pubsub_emulator:8681
+      - GCP_PROJECT_IDS=test-project

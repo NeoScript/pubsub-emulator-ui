@@ -8,6 +8,7 @@ List of topics:
         - subscriptions
         <ul>
             <li *ngFor="let sub of item.subscriptions">
+                <button [routerLink]="['/subscriptions']" [queryParams]="{'subscriptionId': sub}"></button>
                 {{sub}}
             </li>
         </ul>
