@@ -11,6 +11,7 @@ export class SubscriptionsComponent implements OnInit {
 
   subPath = ''
   messages: ReceivedMessage[] = []
+
   constructor(private route: ActivatedRoute, private pubsub: PubsubService) {
   }
 
@@ -20,6 +21,10 @@ export class SubscriptionsComponent implements OnInit {
 
       this.pullMessages()
     })
+  }
+
+  decode(data: string){
+    return atob(data)
   }
 
   pullMessages(): void {
