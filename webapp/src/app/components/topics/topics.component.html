@@ -3,4 +3,13 @@ List of topics:
 
 <div *ngFor="let item of topics">
     {{item.name}}
+
+    <div *ngIf="item.subscriptions">
+        - subscriptions
+        <ul>
+            <li *ngFor="let sub of item.subscriptions">
+                {{sub}}
+            </li>
+        </ul>
+    </div>
 </div>

@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopicsComponent } from './components/topics/topics.component';
 
 import {HttpClientModule} from '@angular/common/http';
-import { IndexComponent } from './index/index.component';
+import { IndexComponent } from './components/index/index.component';
 
 @NgModule({
   declarations: [
