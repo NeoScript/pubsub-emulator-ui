@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EMPTY, firstValueFrom, Observable, of, switchMap } from 'rxjs';
-import { PubsubService, Topic } from 'src/app/services/pubsub.service';
+import { EMPTY, Observable, tap } from 'rxjs';
+import { PubsubService, Subscription, Topic } from 'src/app/services/pubsub.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,38 +10,33 @@ import { PubsubService, Topic } from 'src/app/services/pubsub.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  currentProject: string = ''
 
   topicList$: Observable<Topic[]> = EMPTY
+  topicList2$: Observable<Topic[]> = EMPTY
+  subscriptionList$: Observable<Subscription[]> = EMPTY
 
+  currentProject?: string
   currentTopic?: Topic
+  currentSubscription?: Subscription
+
   constructor(private route: ActivatedRoute, private pubsub: PubsubService) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(qpm => {
-      this.currentProject = qpm.get("project") ?? ''
+      this.currentProject = qpm.get("project") ?? undefined
 
       console.log("loaded project: ", this.currentProject)
-      this.pubsub.listTopics(this.currentProject)
-        .pipe(
-          switchMap(async topicList => {
-            for await (const topic of topicList) {
-              topic.subscriptions = await firstValueFrom(this.pubsub.listSubscriptionsOnTopic(topic.name))
-              console.log(topic.subscriptions)
-            }
-
-            console.log(topicList)
-            return of(topicList)
-          }))
-        .subscribe(result => {
-          this.topicList$ = result
-        })
+      this.pubsub.selectProject(this.currentProject!)
+      this.topicList$ = this.pubsub.listTopics(this.currentProject).pipe(
+        tap(topics => console.log("topics have loaded", topics))
+      )
     })
   }
 
-
-  selectTopic(topic: Topic) {
-    this.currentTopic = topic
+  loadSubsFor(topic: Topic){
+    console.log("load subs for", topic)
+    this.currentSubscription = undefined
+    this.subscriptionList$ = this.pubsub.listSubscriptionsOnTopic(topic.name)
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PubsubService, Topic } from 'src/app/services/pubsub.service';
+import { Topic } from 'src/app/services/pubsub.service';
+
 @Component({
   selector: 'app-topic-list',
   templateUrl: './topic-list.component.html',

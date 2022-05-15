@@ -16,6 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
+import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
     IndexComponent,
     ProjectsComponent,
     NavbarComponent,
-    TopicListComponent
+    TopicListComponent,
+    SubscriptionListComponent
   ],
   imports: [
     BrowserModule,
