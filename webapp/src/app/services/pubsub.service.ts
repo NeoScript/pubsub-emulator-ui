@@ -7,10 +7,11 @@ import { BehaviorSubject, map } from 'rxjs';
 })
 export class PubsubService {
   project_id = "test-project"
-  host = "http://localhost:8681"
+  public currentHost = "http://localhost:8681"
 
   private projectList = new BehaviorSubject<string[]>(["test-project"])
   public projectList$ = this.projectList.asObservable()
+
   constructor(private http: HttpClient) { }
 
   attachProject(newProject: string) {
@@ -20,23 +21,23 @@ export class PubsubService {
     this.projectList.next(newList)
   }
 
-  listTopics() {
-    return this.http.get<{ topics: Topic[] }>(`${this.host}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming.topics))
+  listTopics(projectId: string = this.project_id) {
+    return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming.topics))
   }
   listSubscriptionsOnTopic(topicPath: string) {
     console.log('looking up subscriptions on', topicPath)
-    const url = `${this.host}/v1/${topicPath}/subscriptions`
+    const url = `${this.currentHost}/v1/${topicPath}/subscriptions`
     console.log('request url', url)
     return this.http.get<{ subscriptions: string[] }>(url).pipe(map(incoming => incoming.subscriptions))
   }
   listSubscriptions() {
-    return this.http.get<{ subscriptions: Subscription[] }>(`${this.host}/v1/projects/${this.project_id}/subscriptions`).pipe(map(incoming => incoming.subscriptions))
+    return this.http.get<{ subscriptions: Subscription[] }>(`${this.currentHost}/v1/projects/${this.project_id}/subscriptions`).pipe(map(incoming => incoming.subscriptions))
   }
 
   fetchMessages(subPath: string, maxMessages: number) {
     return this.http
       .post<{ receivedMessages: ReceivedMessage[] }>(
-        `${this.host}/v1/${subPath}:pull`,
+        `${this.currentHost}/v1/${subPath}:pull`,
         { returnImmediately: true, maxMessages }
       ).pipe(map(incoming => incoming.receivedMessages ?? []))
   }

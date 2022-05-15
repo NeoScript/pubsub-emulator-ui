@@ -1,4 +1,9 @@
-.links{
+.content {
+    width: 100%;
+}
+
+.links {
+    float: left;
     display: flex;
     flex-direction: row;
     gap: 1em;
@@ -6,8 +11,12 @@
     align-items: center;
 }
 
-.home-btn{
-    &:hover{
+.home-btn {
+    &:hover {
         color: lightgreen;
     }
+}
+
+.config {
+    float: right;
 }

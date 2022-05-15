@@ -1,10 +1,18 @@
 <mat-toolbar>
-    <div class="container links">
 
-        <button mat-icon-button class="home-btn"
-        [routerLink]="['']">
-            <mat-icon>home</mat-icon>
-        </button>
-        <h3>pubsub-ui</h3>
+    <div class="content">
+        <div class="links">
+
+            <button mat-icon-button class="home-btn"
+            [routerLink]="['']">
+                <mat-icon>home</mat-icon>
+            </button>
+            <h3>pubsub-ui</h3>
+        </div>
+    
+        <div class="config">
+            <h4>current host: {{this.currentHost}}</h4>
+        </div>
     </div>
+
 </mat-toolbar>

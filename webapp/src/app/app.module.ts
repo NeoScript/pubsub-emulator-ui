@@ -13,13 +13,18 @@ import { SubscriptionsComponent } from './components/subscriptions/subscriptions
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopicsComponent,
     IndexComponent,
-    SubscriptionsComponent
+    SubscriptionsComponent,
+    ProjectsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
