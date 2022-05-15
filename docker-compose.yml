@@ -6,7 +6,7 @@ services:
     ports:
       - "8681:8681"
     environment:
-      - PUBSUB_PROJECT1=test-project,topic1:topic1-sub
+      - PUBSUB_PROJECT1=test-project,topic1:topic1-sub,topic2:t2-s1:t2-s2
 
   pubsub-emulator-ui:
     image: echocode/gcp-pubsub-emulator-ui:latest

@@ -1,13 +1,21 @@
 <div class="container">
     <h1>Project: {{this.currentProject}}</h1>
 
-    <div class="data-container">
+    <div class="header-container">
 
         <div class="topics">
             <h2>Topics</h2>
 
             <mat-action-list class="topic-list">
-                <button mat-list-item *ngFor="let topic of (this.topicList$|async)">{{topic.name}}</button>
+                <button mat-list-item class="topic-item" *ngFor="let topic of (this.topicList$|async)"
+                    [ngClass]="{'topic-item--selected': this.currentTopic == topic}" (click)="selectTopic(topic)">
+                    <div class="topic-button">
+                        <span> {{topic.name}}
+                        </span>
+
+                        <mat-icon>arrow_right</mat-icon>
+                    </div>
+                </button>
             </mat-action-list>
         </div>
 
@@ -16,6 +24,10 @@
 
             <button mat-button></button>
         </div>
+
+    </div>
+
+    <div class="main-container">
 
     </div>
 
