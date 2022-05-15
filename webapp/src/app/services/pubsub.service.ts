@@ -73,6 +73,11 @@ export class PubsubService {
         { returnImmediately: true, maxMessages }
       ).pipe(map(incoming => incoming.receivedMessages ?? []))
   }
+
+  ackMessage(subscriptionPath:string, ackIds: string[]){
+    const url = `${this.currentHost}/v1/${subscriptionPath}:acknowledge`
+    return this.http.post(url, {ackIds})
+  }
 }
 
 export interface Topic {

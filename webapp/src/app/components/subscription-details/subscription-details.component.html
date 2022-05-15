@@ -18,14 +18,16 @@
                 <tr>
                     <th>Timestamp</th>
                     <th>Message</th>
-                    <th>ackId</th>
+                    <th>Ack</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let msg of this.messages" class="pubsub-message">
                     <td>{{msg.message.publishTime | date : "short"}}</td>
                     <td>{{msg.message.data}}</td>
-                    <td>{{msg.ackId}}</td>
+                    <td>
+                        <button mat-button color="warn" (click)="this.ackMessage(msg.ackId)">Ack</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EMPTY, map, Observable } from 'rxjs';
+import { EMPTY, firstValueFrom, map, Observable } from 'rxjs';
 import { PubsubService, ReceivedMessage, Subscription } from 'src/app/services/pubsub.service';
 
 @Component({
@@ -42,6 +42,15 @@ export class SubscriptionDetailsComponent implements OnInit {
 
   printSomething(data: any) {
     console.log('called with', data)
+  }
+
+  async ackMessage(ackId: string){
+    const result = await firstValueFrom(this.pubsub.ackMessage(this.subscriptionPath!, [ackId]))
+    console.log("result", result)
+    
+    if(Object.keys(result).length == 0){  // a valid response will be no content
+      this.messages = this.messages.filter(msg => msg.ackId != ackId)
+    }
   }
 
 }
