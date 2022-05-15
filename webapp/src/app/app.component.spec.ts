@@ -26,10 +26,12 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('webapp');
   });
 
-  it('should render title', () => {
+
+  it('should have navbar', ()=>{
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('webapp app is running!');
+    expect(compiled.querySelector('#navbar')).toBeTruthy()
+
   });
 });
