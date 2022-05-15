@@ -17,6 +17,7 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
 import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
+import { SubscriptionDetailsComponent } from './components/subscription-details/subscription-details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SubscriptionListComponent } from './components/subscription-list/subscr
     ProjectsComponent,
     NavbarComponent,
     TopicListComponent,
-    SubscriptionListComponent
+    SubscriptionListComponent,
+    SubscriptionDetailsComponent
   ],
   imports: [
     BrowserModule,
