@@ -1,0 +1,13 @@
+.links{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+
+    align-items: center;
+}
+
+.home-btn{
+    &:hover{
+        color: lightgreen;
+    }
+}

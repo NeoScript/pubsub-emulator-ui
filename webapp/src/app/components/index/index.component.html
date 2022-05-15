@@ -6,7 +6,8 @@
 
     <div class="project-list">
 
-        <button mat-raised-button class="project" *ngFor="let project of (this.projectList$|async)">
+        <button mat-raised-button class="project" *ngFor="let project of (this.projectList$|async)"
+        [routerLink]="['project']" [queryParams]="{'project': project}">
             {{project}}
         </button>
 
