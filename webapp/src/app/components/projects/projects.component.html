@@ -3,20 +3,9 @@
 
     <div class="header-container">
 
-        <div class="topics">
+        <div class="topics" *ngIf="this.topicList$ | async as topicList">
             <h2>Topics</h2>
-
-            <mat-action-list class="topic-list">
-                <button mat-list-item class="topic-item" *ngFor="let topic of (this.topicList$|async)"
-                    [ngClass]="{'topic-item--selected': this.currentTopic == topic}" (click)="selectTopic(topic)">
-                    <div class="topic-button">
-                        <span> {{topic.name}}
-                        </span>
-
-                        <mat-icon>arrow_right</mat-icon>
-                    </div>
-                </button>
-            </mat-action-list>
+            <app-topic-list [topics]="topicList" [(currentTopic)]="this.currentTopic"></app-topic-list>
         </div>
 
         <div class="subscriptions">

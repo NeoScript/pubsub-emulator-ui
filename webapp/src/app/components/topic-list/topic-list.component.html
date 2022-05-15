@@ -1,0 +1,11 @@
+<mat-action-list class="topic-list">
+    <button mat-list-item class="topic-item" *ngFor="let topic of this.topics"
+        [ngClass]="{'topic-item--selected': this.currentTopic == topic}" (click)="selectTopic(topic)">
+        <div class="topic-button">
+            <span> {{topic.name}}
+            </span>
+
+            <mat-icon>arrow_right</mat-icon>
+        </div>
+    </button>
+</mat-action-list>

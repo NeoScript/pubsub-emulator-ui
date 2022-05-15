@@ -17,6 +17,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TopicListComponent } from './components/topic-list/topic-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     IndexComponent,
     SubscriptionsComponent,
     ProjectsComponent,
-    NavbarComponent
+    NavbarComponent,
+    TopicListComponent
   ],
   imports: [
     BrowserModule,
