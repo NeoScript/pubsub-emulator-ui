@@ -41,19 +41,26 @@ export class PubsubService {
   listTopics(projectId: string = this.project_id) {
     return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming.topics))
   }
-  listSubscriptionsOnTopic(topicPath: string) {
-    console.log('looking up subscriptions on', topicPath)
-    const url = `${this.currentHost}/v1/${topicPath}/subscriptions`
-    console.log('request url', url)
-    return this.http.get<{ subscriptions: Subscription[] }>(url).pipe(map(incoming => incoming.subscriptions))
-  }
-  listSubscriptions() {
+
+  listSubscriptions(): Observable<Subscription[]> {
     return this.http.get<{ subscriptions: string[] }>(`${this.currentHost}/v1/projects/${this.project_id}/subscriptions`)
       .pipe(
         map(incoming => incoming.subscriptions), // first we pull out the subscriptions object
-        map(subNames => subNames.map(name => {name})) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
+        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
       )
   }
+
+  listSubscriptionsOnTopic(topicPath: string): Observable<Subscription[]> {
+    console.log('looking up subscriptions on', topicPath)
+    const url = `${this.currentHost}/v1/${topicPath}/subscriptions`
+    console.log('request url', url)
+    return this.http.get<{ subscriptions: string[] }>(url)
+      .pipe(
+        map(incoming => incoming.subscriptions),
+        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
+      )
+  }
+
 
   fetchMessages(subPath: string, maxMessages: number) {
     return this.http
@@ -67,7 +74,6 @@ export class PubsubService {
 export interface Topic {
   name: string
   labels: { [key: string]: string }
-  subscriptions?: string[]
 }
 
 export interface Subscription {
