@@ -1,0 +1,29 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.header{
+    display: grid;
+    gap: .5em;
+    grid-template-areas: 
+    'path pullButton'
+    'topic pullButton';
+
+    #path{
+        grid-area: path;
+    }
+
+    #topic{
+        grid-area: topic;
+    }
+
+    #pullMessagesBtn{
+        grid-area: pullButton;
+    }
+}
+
+.message-pane{
+    background-color: rgb(30, 30, 30);
+}

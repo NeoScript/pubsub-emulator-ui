@@ -1,1 +1,22 @@
-<p>subscription-details works!</p>
+<div *ngIf="this.details|async as subscription" class="content">
+    <h3>Subscription Details</h3>
+
+    <div class="header">
+        <div id="path">path: {{subscription.name}}</div>
+        <div id="topic">topic: {{subscription.topic}}</div>
+        <button id="pullMessagesBtn" mat-raised-button color="primary" (click)="this.pullMessages()">
+            Pull Messages
+            <mat-icon matSuffix>download</mat-icon>
+        </button>
+    </div>
+
+
+    <div class="message-pane">
+        <mat-list *ngIf="this.messages">
+            <div>Messages Received: {{this.messages.length}}</div>
+            <mat-list-item *ngFor="let msg of messages">
+                {{msg.message.data}}
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

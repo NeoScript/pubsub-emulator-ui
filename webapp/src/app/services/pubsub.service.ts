@@ -61,6 +61,10 @@ export class PubsubService {
       )
   }
 
+  getSubscriptionDetails(subscriptionPath: string){
+    const url = `${this.currentHost}/v1/${subscriptionPath}`
+    return this.http.get<Subscription>(url)
+  }
 
   fetchMessages(subPath: string, maxMessages: number) {
     return this.http

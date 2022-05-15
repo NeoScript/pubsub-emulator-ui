@@ -20,7 +20,9 @@
         'main-container--no-topic': this.currentTopic == undefined,
         'main-container--no-subscription': this.currentTopic != undefined && this.currentSubscription == undefined
     }">
-
+        <div *ngIf="this.currentTopic && this.currentSubscription">
+            <app-subscription-details [subscriptionPath]="this.currentSubscription.name"></app-subscription-details>
+        </div>
     </div>
 
 </div>
