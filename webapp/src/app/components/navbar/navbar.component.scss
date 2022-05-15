@@ -1,9 +1,12 @@
 .content {
     width: 100%;
+    
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .links {
-    float: left;
     display: flex;
     flex-direction: row;
     gap: 1em;
@@ -15,8 +18,4 @@
     &:hover {
         color: lightgreen;
     }
-}
-
-.config {
-    float: right;
 }
