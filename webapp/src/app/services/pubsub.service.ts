@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,17 @@ import { map } from 'rxjs';
 export class PubsubService {
   project_id = "test-project"
   host = "http://localhost:8681"
+
+  private projectList = new BehaviorSubject<string[]>(["test-project"])
+  public projectList$ = this.projectList.asObservable()
   constructor(private http: HttpClient) { }
+
+  attachProject(newProject: string) {
+    const newList = this.projectList.getValue()
+    newList.push(newProject)
+
+    this.projectList.next(newList)
+  }
 
   listTopics() {
     return this.http.get<{ topics: Topic[] }>(`${this.host}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming.topics))

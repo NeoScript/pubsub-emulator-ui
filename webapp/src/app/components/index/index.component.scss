@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-list {
+    display: grid;
+
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 1em;
+    padding: 1em;
+
+    .project {
+        min-height: 6em;
+        display: grid;
+        place-items: center;
+
+        border: 2px solid transparent;
+
+        color: lightgray;
+
+        &:hover {
+            cursor: pointer;
+            border: 2px solid green;
+            color: whitesmoke;
+        }
+    }
+
+    .new-project {
+        @extend .project;
+        display: grid;
+        color: lightgreen;
+
+        border: 2px dashed lightgreen;
+
+        &:hover{
+            border: 2px dashed lightgreen;
+        }
+    }
+}

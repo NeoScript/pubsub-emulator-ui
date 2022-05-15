@@ -1,1 +1,18 @@
-<p>index works!</p>
+<div class="container">
+    <div class="header">
+        <h3>Select a Project from the list:</h3>
+        <p class="caption">Or Create a new one!</p>
+    </div>
+
+    <div class="project-list">
+
+        <button mat-raised-button class="project" *ngFor="let project of (this.projectList$|async)">
+            {{project}}
+        </button>
+
+        <button mat-stroked-button class="new-project">
+            <mat-icon>add_circle</mat-icon>
+            Attach new project
+        </button>
+    </div>
+</div>
