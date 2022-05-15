@@ -27,7 +27,10 @@
 
     </div>
 
-    <div class="main-container" [ngClass]="{'main-container--empty': this.currentTopic == null}">
+    <div class="main-container" [ngClass]="{
+        'main-container--no-topic': this.currentTopic == null,
+        'main-container--no-subscription': this.currentTopic != null
+    }">
 
     </div>
 

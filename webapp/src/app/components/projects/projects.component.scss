@@ -33,15 +33,25 @@
 .main-container {
     padding: 1em;
 
-    &--empty::before {
+    &--no-topic::before {
         display: grid;
         place-items: center;
 
         color: gray;
-        content: "select topic & subscription above.";
+        content: "select a topic & subscription above.";
 
         animation: glow 1s infinite alternate;
 
+    }
+
+    &--no-subscription::before{
+        display: grid;
+        place-items: center;
+
+        color: gray;
+        content: "select a subscription above.";
+
+        animation: glow 1s infinite alternate;
     }
 }
 
