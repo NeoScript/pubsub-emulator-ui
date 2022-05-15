@@ -1,7 +1,12 @@
 # PubSub Emulator UI
 
 ## Introduction
-This application is meant to assist in local development of software related to Google PubSub.
+This application is meant to assist in local development of software related to Google Pub/Sub.
+
+### Screenshots
+[![Screenshot-from-2022-05-15-15-47-40.png](https://i.postimg.cc/Fzy9cv7Q/Screenshot-from-2022-05-15-15-47-40.png)](https://postimg.cc/wRB88SXW)
+
+[![Screenshot-from-2022-05-15-15-48-34.png](https://i.postimg.cc/2jhjgQTX/Screenshot-from-2022-05-15-15-48-34.png)](https://postimg.cc/CdMVqf3j)
 
 ### Motivations
  - The current Google Pub/Sub emulator does not have any visual tooling
