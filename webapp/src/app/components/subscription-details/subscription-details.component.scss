@@ -24,6 +24,22 @@
     }
 }
 
-.message-pane{
+.message-list{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.pubsub-message{
     background-color: rgb(30, 30, 30);
+}
+
+.message-table{
+    width: 100%;
+    border-collapse: collapse;
+
+    tbody>tr> td{
+        margin: .2em;
+        padding: 1em;
+    }
 }

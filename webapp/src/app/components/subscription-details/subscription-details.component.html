@@ -12,11 +12,22 @@
 
 
     <div class="message-pane">
-        <mat-list *ngIf="this.messages">
-            <div>Messages Received: {{this.messages.length}}</div>
-            <mat-list-item *ngFor="let msg of messages">
-                {{msg.message.data}}
-            </mat-list-item>
-        </mat-list>
+        <div>Messages Received: {{this.messages.length}}</div>
+        <table class="message-table mat-table" *ngIf="this.messages">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Message</th>
+                    <th>ackId</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let msg of this.messages" class="pubsub-message">
+                    <td>{{msg.message.publishTime | date : "short"}}</td>
+                    <td>{{msg.message.data}}</td>
+                    <td>{{msg.ackId}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
