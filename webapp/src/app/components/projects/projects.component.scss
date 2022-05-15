@@ -1,0 +1,12 @@
+.container{
+    margin-top: 2em;
+}
+
+
+.data-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border: 1px solid green;
+}

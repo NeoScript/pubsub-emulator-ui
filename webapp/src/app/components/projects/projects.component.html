@@ -1,1 +1,22 @@
-<p>projects works!</p>
+<div class="container">
+    <h1>Project: {{this.currentProject}}</h1>
+
+    <div class="data-container">
+
+        <div class="topics">
+            <h2>Topics</h2>
+
+            <mat-action-list class="topic-list">
+                <button mat-list-item *ngFor="let topic of (this.topicList$|async)">{{topic.name}}</button>
+            </mat-action-list>
+        </div>
+
+        <div class="subscriptions">
+            <h2>Subscriptions</h2>
+
+            <button mat-button></button>
+        </div>
+
+    </div>
+
+</div>
