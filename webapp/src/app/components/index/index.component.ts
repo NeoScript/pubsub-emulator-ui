@@ -10,16 +10,12 @@ import { PubsubService } from 'src/app/services/pubsub.service';
 export class IndexComponent implements OnInit {
 
   projectList$: Observable<string[]>
-  message = "default message value"
+
   constructor(private pubsub: PubsubService) {
     this.projectList$ = pubsub.projectList$
   }
 
   ngOnInit(): void {
-  }
-
-  printMessage(): void {
-    console.log("message value is -> ", this.message)
   }
 
 }
