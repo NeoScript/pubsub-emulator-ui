@@ -1,14 +1,14 @@
 .container {
     display: flex;
     flex-direction: column;
+
+    gap: 1em;
 }
 
 
 .header-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-
-    border: 1px solid green;
 }
 
 .topic-item {
@@ -16,7 +16,8 @@
     margin: .1em;
 
     color: gray;
-    &--selected{
+
+    &--selected {
         color: whitesmoke;
     }
 }
@@ -29,5 +30,26 @@
 }
 
 .main-container {
-    border: 1px solid blue;
+    padding: 1em;
+
+    &--empty::before {
+        display: grid;
+        place-items: center;
+
+        color: gray;
+        content: "select topic & subscription above.";
+
+        animation: glow 1s infinite alternate;
+
+    }
+}
+
+@keyframes glow {
+    from {
+        color: gray;
+    }
+
+    to {
+        color: white;
+    }
 }
