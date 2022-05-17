@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, tap } from 'rxjs';
-import { PubsubService, Subscription, Topic } from 'src/app/services/pubsub.service';
+import { PubsubMessage, PubsubService, Subscription, Topic } from 'src/app/services/pubsub.service';
 
 @Component({
   selector: 'app-projects',
@@ -33,14 +33,22 @@ export class ProjectsComponent implements OnInit {
     })
   }
 
-  loadSubsFor(topic: Topic){
+  loadSubsFor(topic: Topic) {
     console.log("load subs for", topic)
     this.currentSubscription = undefined
     this.subscriptionList$ = this.pubsub.listSubscriptionsOnTopic(topic.name)
   }
 
-  handlePublishRequest(message: string){
-    console.log("publish message request:", message)
+  handlePublishRequest(event: {topic: Topic, message: string}) {
+    console.log("publish message request:", event.message)
+
+    const pubsubMessage: PubsubMessage = {
+      data: btoa(event.message)
+    }
+
+    this.pubsub.publishMessages(event.topic.name, [pubsubMessage]).subscribe(result =>{
+      console.log("published to ids", result.messageIds)
+    })
   }
 
 }

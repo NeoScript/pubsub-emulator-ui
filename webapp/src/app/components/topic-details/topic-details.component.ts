@@ -11,7 +11,7 @@ export class TopicDetailsComponent implements OnInit {
 
   @Input() topic?: Topic
 
-  @Output() onMessagePublish = new EventEmitter<string>()
+  @Output() onMessagePublish = new EventEmitter<{ topic: Topic, message: string }>()
 
   public inputField = new FormControl('', Validators.required)
   constructor() { }
@@ -22,7 +22,8 @@ export class TopicDetailsComponent implements OnInit {
   publishMessage() {
     console.log("this value was found", this.inputField.value)
 
-    this.onMessagePublish.emit(this.inputField.value)
+    this.onMessagePublish.emit({ topic: this.topic!, message: this.inputField.value })
+    this.inputField.reset()
   }
 
 }

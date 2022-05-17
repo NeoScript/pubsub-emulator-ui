@@ -78,6 +78,11 @@ export class PubsubService {
     const url = `${this.currentHost}/v1/${subscriptionPath}:acknowledge`
     return this.http.post(url, {ackIds})
   }
+
+  publishMessages(topicPath: string, messages: PubsubMessage[]){
+    const url = `${this.currentHost}/v1/${topicPath}:publish`
+    return this.http.post<{messageIds: string[]}>(url, {messages})
+  }
 }
 
 export interface Topic {
@@ -98,8 +103,8 @@ export interface ReceivedMessage {
 
 export interface PubsubMessage {
   data: string
-  attributes: { [key: string]: string }
-  messageId: string
-  publishTime: string
-  orderingKey: string
+  attributes?: { [key: string]: string }
+  messageId?: string
+  publishTime?: string
+  orderingKey?: string
 }
