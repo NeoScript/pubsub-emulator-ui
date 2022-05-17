@@ -1,5 +1,18 @@
 # PubSub Emulator UI
 
+## Quickstart
+
+1. download the docker-compose.yml
+2. Spin up the emulator + ui
+    ```
+    docker-compose up
+    ```
+3. You will have a pubsub emulator running with the project name: `test-project`
+    - feel free to modify the topic + subscriptions in the docker compose for your needs
+4. Run docker ps to list the running containers so that you can see the ports you need to connect to
+    - by default emulator on 8681, ui on 7200 (you can change this in docker-compose)
+
+
 ## Introduction
 This application is meant to assist in local development of software related to Google Pub/Sub.
 
