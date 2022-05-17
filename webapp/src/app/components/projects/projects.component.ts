@@ -39,4 +39,8 @@ export class ProjectsComponent implements OnInit {
     this.subscriptionList$ = this.pubsub.listSubscriptionsOnTopic(topic.name)
   }
 
+  handlePublishRequest(message: string){
+    console.log("publish message request:", message)
+  }
+
 }

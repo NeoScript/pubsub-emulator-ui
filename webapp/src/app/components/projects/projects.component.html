@@ -23,6 +23,11 @@
         <div *ngIf="this.currentTopic && this.currentSubscription">
             <app-subscription-details [subscriptionPath]="this.currentSubscription.name"></app-subscription-details>
         </div>
+
+        <div *ngIf="this.currentTopic && !this.currentSubscription">
+            <app-topic-details [topic]="this.currentTopic" (onMessagePublish)="this.handlePublishRequest($event)"></app-topic-details>
+        </div>
+
     </div>
 
 </div>

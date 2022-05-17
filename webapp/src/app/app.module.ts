@@ -1,23 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { HttpClientModule } from '@angular/common/http';
-import { IndexComponent } from './components/index/index.component';
-
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { ProjectsComponent } from './components/projects/projects.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { IndexComponent } from './components/index/index.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TopicListComponent } from './components/topic-list/topic-list.component';
-import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 import { SubscriptionDetailsComponent } from './components/subscription-details/subscription-details.component';
+import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
+import { TopicDetailsComponent } from './components/topic-details/topic-details.component';
+import { TopicListComponent } from './components/topic-list/topic-list.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,19 +31,23 @@ import { SubscriptionDetailsComponent } from './components/subscription-details/
     NavbarComponent,
     TopicListComponent,
     SubscriptionListComponent,
-    SubscriptionDetailsComponent
+    SubscriptionDetailsComponent,
+    TopicDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
 
     MatButtonModule,
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

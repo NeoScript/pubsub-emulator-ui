@@ -1,0 +1,9 @@
+<div class="header">
+    <h3>Publish Message to topic: {{this.topic?.name}}</h3>
+    <button mat-raised-button [disabled]="this.inputField.invalid" (click)="this.publishMessage()">Publish Message!</button>
+</div>
+
+<mat-form-field appearance="outline" class="text-field">
+    <textarea matInput [cdkTextareaAutosize]="true" cdkAutosizeMinRows="15" [formControl]="this.inputField"></textarea>
+</mat-form-field>
+
