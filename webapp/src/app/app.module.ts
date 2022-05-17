@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,7 @@ import { SubscriptionDetailsComponent } from './components/subscription-details/
 import { SubscriptionListComponent } from './components/subscription-list/subscription-list.component';
 import { TopicDetailsComponent } from './components/topic-details/topic-details.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
+import { NewTopicDialogComponent } from './components/topic-list/new-topic-dialog/new-topic-dialog.component';
 
 
 
@@ -32,7 +34,8 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
     TopicListComponent,
     SubscriptionListComponent,
     SubscriptionDetailsComponent,
-    TopicDetailsComponent
+    TopicDetailsComponent,
+    NewTopicDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
     MatToolbarModule,
     MatListModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

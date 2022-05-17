@@ -38,6 +38,12 @@ export class PubsubService {
     this._projectList.next(newList)
   }
 
+  createTopic(projectId: string = this.project_id, topicId: string){
+    const url = `${this.currentHost}/v1/projects/${projectId}/topics/${topicId}`
+
+    return this.http.put<Topic>(url, {})
+  }
+
   listTopics(projectId: string = this.project_id) {
     return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming.topics))
   }

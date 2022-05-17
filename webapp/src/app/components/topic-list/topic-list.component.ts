@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { firstValueFrom } from 'rxjs';
 import { Topic } from 'src/app/services/pubsub.service';
+import { NewTopicDialogComponent } from './new-topic-dialog/new-topic-dialog.component';
 
 @Component({
   selector: 'app-topic-list',
@@ -12,7 +15,8 @@ export class TopicListComponent implements OnInit {
   
   @Input() currentTopic?: Topic
   @Output() currentTopicChange = new EventEmitter<Topic>()
-  constructor() { }
+  @Output() newTopicRequest = new EventEmitter<string>()
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -20,6 +24,17 @@ export class TopicListComponent implements OnInit {
   selectTopic(topic: Topic){
     this.currentTopic = topic
     this.currentTopicChange.emit(topic)
+  }
+
+  async createNewTopic(){
+    const ref = this.dialog.open(NewTopicDialogComponent)
+
+    const result = await firstValueFrom<{newTopic: string}>(ref.afterClosed())
+    console.log("new topic returned", result?.newTopic)
+
+    if(result?.newTopic){
+      this.newTopicRequest.emit(result?.newTopic)
+    }
   }
 
 }
