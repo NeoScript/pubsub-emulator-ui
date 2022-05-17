@@ -4,7 +4,6 @@ WORKDIR /app
 ADD webapp .
 RUN npm install
 RUN npm run build
-RUN ls
 
 FROM nginx:alpine as serve
 WORKDIR /usr/share/nginx/html
