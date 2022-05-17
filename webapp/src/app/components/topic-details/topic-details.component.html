@@ -1,6 +1,9 @@
 <div class="header">
     <h3>Publish Message to topic: {{this.topic?.name}}</h3>
-    <button mat-raised-button [disabled]="this.inputField.invalid" (click)="this.publishMessage()">Publish Message!</button>
+    <button mat-raised-button color="primary" [disabled]="this.inputField.invalid" (click)="this.publishMessage()">
+        Publish Message!
+        <mat-icon>send</mat-icon>
+    </button>
 </div>
 
 <mat-form-field appearance="outline" class="text-field">

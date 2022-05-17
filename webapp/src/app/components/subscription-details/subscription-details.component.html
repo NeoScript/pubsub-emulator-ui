@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let msg of this.messages" class="pubsub-message">
-                    <td>{{msg.message.publishTime | date : "short"}}</td>
+                    <td>{{msg.message.publishTime | date : "long"}}</td>
                     <td>{{msg.message.data}}</td>
                     <td>
                         <button mat-button color="warn" (click)="this.ackMessage(msg.ackId)">Ack</button>
