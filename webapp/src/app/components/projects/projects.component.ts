@@ -51,4 +51,15 @@ export class ProjectsComponent implements OnInit {
     })
   }
 
+  handleNewTopicRequest(newTopic: string){
+    this.pubsub.createTopic(this.currentProject, newTopic).subscribe(result =>{
+      console.log("pubsub response:")
+      console.log(result)
+
+      this.topicList$ = this.pubsub.listTopics(this.currentProject).pipe(
+        tap(topics => console.log("topics have loaded", topics))
+      )
+    })
+  }
+
 }

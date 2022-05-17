@@ -31,6 +31,10 @@ export class TopicListComponent implements OnInit {
 
     const result = await firstValueFrom<{newTopic: string}>(ref.afterClosed())
     console.log("new topic returned", result?.newTopic)
+
+    if(result?.newTopic){
+      this.newTopicRequest.emit(result?.newTopic)
+    }
   }
 
 }
