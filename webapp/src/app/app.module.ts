@@ -21,6 +21,7 @@ import { SubscriptionListComponent } from './components/subscription-list/subscr
 import { TopicDetailsComponent } from './components/topic-details/topic-details.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
 import { NewTopicDialogComponent } from './components/topic-list/new-topic-dialog/new-topic-dialog.component';
+import { NewSubscriptionDialogComponent } from './components/subscription-list/new-subscription-dialog/new-subscription-dialog.component';
 
 
 
@@ -35,7 +36,8 @@ import { NewTopicDialogComponent } from './components/topic-list/new-topic-dialo
     SubscriptionListComponent,
     SubscriptionDetailsComponent,
     TopicDetailsComponent,
-    NewTopicDialogComponent
+    NewTopicDialogComponent,
+    NewSubscriptionDialogComponent
   ],
   imports: [
     BrowserModule,

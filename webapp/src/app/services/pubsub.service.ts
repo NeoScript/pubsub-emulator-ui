@@ -114,3 +114,8 @@ export interface PubsubMessage {
   publishTime?: string
   orderingKey?: string
 }
+
+export interface PushConfig{
+  pushEndpoint: string
+  attributes?: {[key: string]: string}
+}

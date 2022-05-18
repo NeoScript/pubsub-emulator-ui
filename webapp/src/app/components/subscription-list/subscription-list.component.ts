@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'src/app/services/pubsub.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class SubscriptionListComponent implements OnInit {
 
   @Input() currentSubscription?: Subscription
   @Output() currentSubscriptionChange = new EventEmitter<Subscription>()
-  constructor() { }
+  @Output() newSubscriptionRequest = new EventEmitter<string>()
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -23,6 +25,10 @@ export class SubscriptionListComponent implements OnInit {
   selectSubscription(subscription: Subscription) {
     this.currentSubscription = subscription
     this.currentSubscriptionChange.emit(subscription)
+  }
+
+  createSubscription(): void{
+    
   }
 
 }
