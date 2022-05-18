@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { firstValueFrom } from 'rxjs';
 import { Subscription } from 'src/app/services/pubsub.service';
+import { NewSubscriptionDialogComponent, NewSubscriptionRequest } from './new-subscription-dialog/new-subscription-dialog.component';
 
 @Component({
   selector: 'app-subscription-list',
@@ -27,8 +29,12 @@ export class SubscriptionListComponent implements OnInit {
     this.currentSubscriptionChange.emit(subscription)
   }
 
-  createSubscription(): void{
-    
+  async newSubscription(){
+    const ref = this.dialog.open(NewSubscriptionDialogComponent)
+
+    const result = await firstValueFrom<NewSubscriptionRequest>(ref.afterClosed())
+
+    console.log("result from dialog", result)
   }
 
 }
