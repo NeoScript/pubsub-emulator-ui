@@ -1,11 +1,25 @@
 <mat-action-list class="subscription-list">
-    <button mat-list-item class="item" *ngFor="let subscription of this.subscriptions"
-        [ngClass]="{'item--selected': this.currentSubscription == subscription}" (click)="selectSubscription(subscription)">
-        <div class="topic-button">
-            <span> {{subscription.name}}
-            </span>
 
-            <mat-icon>arrow_right</mat-icon>
+    <ng-container *ngIf="this.subscriptions">
+        <button mat-list-item class="item" *ngFor="let subscription of this.subscriptions"
+            [ngClass]="{'item--selected': this.currentSubscription == subscription}"
+            (click)="selectSubscription(subscription)">
+            <div class="subscription-button">
+                <span> {{subscription.name}}
+                </span>
+
+                <mat-icon>arrow_right</mat-icon>
+            </div>
+        </button>
+    </ng-container>
+
+
+    <button mat-list-item class="item" (click)="newSubscription()">
+
+        <div class="subscription-button">
+            <span>Create New Subscription</span>
+            <mat-icon>add</mat-icon>
         </div>
+
     </button>
 </mat-action-list>
