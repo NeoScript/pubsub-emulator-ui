@@ -9,9 +9,16 @@ import { PushConfig } from 'src/app/services/pubsub.service';
 })
 export class NewSubscriptionDialogComponent implements OnInit {
 
+  configType?: string
+
   constructor(private ref: MatDialogRef<NewSubscriptionDialogComponent, NewSubscriptionRequest>) { }
 
   ngOnInit(): void {
+  }
+
+  setConfigType(type: string){
+    console.log("user slected type", type)
+    this.configType = type
   }
 
   submit(): void {
