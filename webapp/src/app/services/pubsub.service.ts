@@ -55,11 +55,17 @@ export class PubsubService {
     return this.http.put<Subscription>(url, {topic: request.topic, pushConfig: request.pushConfig})
   }
 
+  deleteSubscription(subscriptionPath: string){
+    const url = `${this.currentHost}/v1/${subscriptionPath}`
+    return this.http.delete(url)
+  }
+
   listSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<{ subscriptions: string[] }>(`${this.currentHost}/v1/projects/${this.project_id}/subscriptions`)
+    return this.http.get<{ subscriptions?: string[] }>(`${this.currentHost}/v1/projects/${this.project_id}/subscriptions`)
       .pipe(
         map(incoming => incoming.subscriptions), // first we pull out the subscriptions object
-        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
+        map(subNames => subNames??[]),
+        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription)) ) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
       )
   }
 
@@ -67,9 +73,10 @@ export class PubsubService {
     console.log('looking up subscriptions on', topicPath)
     const url = `${this.currentHost}/v1/${topicPath}/subscriptions`
     console.log('request url', url)
-    return this.http.get<{ subscriptions: string[] }>(url)
+    return this.http.get<{ subscriptions?: string[] }>(url)
       .pipe(
         map(incoming => incoming.subscriptions),
+        map(subNames => subNames??[]),
         map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
       )
   }
