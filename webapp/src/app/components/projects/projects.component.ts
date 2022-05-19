@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, tap } from 'rxjs';
 import { PubsubMessage, PubsubService, Subscription, Topic } from 'src/app/services/pubsub.service';
+import { NewSubscriptionRequest } from '../subscription-list/new-subscription-dialog/new-subscription-dialog.component';
 
 @Component({
   selector: 'app-projects',
@@ -52,13 +53,22 @@ export class ProjectsComponent implements OnInit {
   }
 
   handleNewTopicRequest(newTopic: string){
-    this.pubsub.createTopic(this.currentProject, newTopic).subscribe(result =>{
+    this.pubsub.createTopic(this.currentProject!, newTopic).subscribe(result =>{
       console.log("pubsub response:")
       console.log(result)
 
       this.topicList$ = this.pubsub.listTopics(this.currentProject).pipe(
         tap(topics => console.log("topics have loaded", topics))
       )
+    })
+  }
+
+
+  handleNewSubscription(request: NewSubscriptionRequest){
+    console.log("starting http", request)
+    this.pubsub.createSubscription(this.currentProject!, request).subscribe(result =>{
+      console.log("sub created", request)
+      this.loadSubsFor(this.currentTopic!)
     })
   }
 

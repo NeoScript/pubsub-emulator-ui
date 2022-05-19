@@ -16,7 +16,7 @@ export class SubscriptionListComponent implements OnInit {
 
   @Input() currentSubscription?: Subscription
   @Output() currentSubscriptionChange = new EventEmitter<Subscription>()
-  @Output() newSubscriptionRequest = new EventEmitter<string>()
+  @Output() newSubscriptionRequest = new EventEmitter<NewSubscriptionRequest>()
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -30,13 +30,15 @@ export class SubscriptionListComponent implements OnInit {
     this.currentSubscriptionChange.emit(subscription)
   }
 
-  async newSubscription(){
-    const ref = this.dialog.open(NewSubscriptionDialogComponent)
+  async newSubscription() {
+    const ref = this.dialog.open<NewSubscriptionDialogComponent, any, NewSubscriptionRequest>(NewSubscriptionDialogComponent)
     ref.componentInstance.topic = this.topic
 
-    const result = await firstValueFrom<NewSubscriptionRequest>(ref.afterClosed())
+    const result = await firstValueFrom<NewSubscriptionRequest | undefined>(ref.afterClosed())
+    if (!result) { return } // if no resulting data, just end here!
 
     console.log("result from dialog", result)
+    this.newSubscriptionRequest.emit(result)
   }
 
 }

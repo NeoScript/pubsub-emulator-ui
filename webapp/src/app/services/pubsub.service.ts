@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, map, Observable, ReplaySubject } from 'rxjs';
+import { NewSubscriptionRequest } from '../components/subscription-list/new-subscription-dialog/new-subscription-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,12 @@ export class PubsubService {
 
   listTopics(projectId: string = this.project_id) {
     return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming.topics))
+  }
+
+  createSubscription(projectId: string, request: NewSubscriptionRequest){
+    const url = `${this.currentHost}/v1/projects/${projectId}/subscriptions/${request.name}`
+
+    return this.http.put<Subscription>(url, {topic: request.topic, pushConfig: request.pushConfig})
   }
 
   listSubscriptions(): Observable<Subscription[]> {

@@ -14,7 +14,7 @@
 
         <div class="subscriptions" *ngIf="this.subscriptionList$ | async as possibleSubs">
             <h2>Subscriptions</h2>
-            <app-subscription-list [topic]="this.currentTopic" [subscriptions]="possibleSubs" [(currentSubscription)]="this.currentSubscription">
+            <app-subscription-list [topic]="this.currentTopic" [subscriptions]="possibleSubs" [(currentSubscription)]="this.currentSubscription" (newSubscriptionRequest)="this.handleNewSubscription($event)">
             </app-subscription-list>
         </div>
 

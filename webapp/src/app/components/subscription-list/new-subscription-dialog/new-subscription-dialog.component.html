@@ -21,18 +21,38 @@
 
     <mat-step color="accent">
         <ng-template matStepLabel>Configuration</ng-template>
-        <ng-container *ngIf="this.configType === 'pull';then pullConfig; else pushConfig"></ng-container>
+
+        <div class="final-config">
+            <mat-form-field appearance="outline" [style.width]="'100%'" class="nameInput">
+                <mat-label>Enter subscription name</mat-label>
+                <mat-hint>becomes '/projects/project-name/subscriptions/{{this.subscriptionForm.value}}'</mat-hint>
+                <input matInput type="text" autocomplete="off" [formControl]="this.subscriptionForm">
+            </mat-form-field>
+
+            <ng-container *ngIf="this.configType === 'pull';then pullConfig; else pushConfig"></ng-container>
+        </div>
     </mat-step>
 </mat-horizontal-stepper>
 
 <ng-template #pullConfig>
-    No extra steps are required for a pull config!
-
-    <button mat-raised-button color="accent" (click)="createPullSubscription()">
-        Create Subscription
+    <button mat-raised-button color="accent" (click)="createPullSubscription()"
+        [disabled]="this.subscriptionForm.invalid">
+        Create Pull Subscription
         <mat-icon>add</mat-icon>
     </button>
 </ng-template>
+
 <ng-template #pushConfig>
-    Push Config
+
+    <mat-form-field appearance="outline" [style.width]="'100%'" class="nameInput">
+        <mat-label>Enter endpoint url</mat-label>
+        <mat-hint>new messages will trigger this endpoint.</mat-hint>
+        <input matInput type="text" autocomplete="off" [formControl]="this.endpointForm">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" (click)="createPushSubscription()"
+        [disabled]="this.subscriptionForm.invalid || this.endpointForm.invalid">
+        Create Push Subscription
+        <mat-icon>add</mat-icon>
+    </button>
 </ng-template>
