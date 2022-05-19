@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { PushConfig } from 'src/app/services/pubsub.service';
+import { PushConfig, Topic } from 'src/app/services/pubsub.service';
 
 @Component({
   selector: 'app-new-subscription-dialog',
@@ -10,6 +10,7 @@ import { PushConfig } from 'src/app/services/pubsub.service';
 export class NewSubscriptionDialogComponent implements OnInit {
 
   configType?: string
+  topic?: Topic
 
   constructor(private ref: MatDialogRef<NewSubscriptionDialogComponent, NewSubscriptionRequest>) { }
 
@@ -25,6 +26,12 @@ export class NewSubscriptionDialogComponent implements OnInit {
     this.ref.close({
       topic: '',
       pushConfig: undefined
+    })
+  }
+
+  createPullSubscription(): void{
+    this.ref.close({
+      topic: this.topic!.name
     })
   }
 

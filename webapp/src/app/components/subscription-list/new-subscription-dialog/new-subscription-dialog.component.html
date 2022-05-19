@@ -26,7 +26,12 @@
 </mat-horizontal-stepper>
 
 <ng-template #pullConfig>
-    Pull Config
+    No extra steps are required for a pull config!
+
+    <button mat-raised-button color="accent" (click)="createPullSubscription()">
+        Create Subscription
+        <mat-icon>add</mat-icon>
+    </button>
 </ng-template>
 <ng-template #pushConfig>
     Push Config
