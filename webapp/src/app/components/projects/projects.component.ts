@@ -40,20 +40,20 @@ export class ProjectsComponent implements OnInit {
     this.subscriptionList$ = this.pubsub.listSubscriptionsOnTopic(topic.name)
   }
 
-  handlePublishRequest(event: {topic: Topic, message: string}) {
+  handlePublishRequest(event: { topic: Topic, message: string }) {
     console.log("publish message request:", event.message)
 
     const pubsubMessage: PubsubMessage = {
       data: btoa(event.message)
     }
 
-    this.pubsub.publishMessages(event.topic.name, [pubsubMessage]).subscribe(result =>{
+    this.pubsub.publishMessages(event.topic.name, [pubsubMessage]).subscribe(result => {
       console.log("published to ids", result.messageIds)
     })
   }
 
-  handleNewTopicRequest(newTopic: string){
-    this.pubsub.createTopic(this.currentProject!, newTopic).subscribe(result =>{
+  handleNewTopicRequest(newTopic: string) {
+    this.pubsub.createTopic(this.currentProject!, newTopic).subscribe(result => {
       console.log("pubsub response:")
       console.log(result)
 
@@ -64,9 +64,9 @@ export class ProjectsComponent implements OnInit {
   }
 
 
-  handleNewSubscription(request: NewSubscriptionRequest){
+  handleNewSubscription(request: NewSubscriptionRequest) {
     console.log("starting http", request)
-    this.pubsub.createSubscription(this.currentProject!, request).subscribe(result =>{
+    this.pubsub.createSubscription(this.currentProject!, request).subscribe(result => {
       console.log("sub created", request)
       this.loadSubsFor(this.currentTopic!)
     })
