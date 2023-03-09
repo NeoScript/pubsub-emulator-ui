@@ -46,7 +46,7 @@ export class PubsubService {
   }
 
   listTopics(projectId: string = this.project_id) {
-    return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming.topics))
+    return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming?.topics || []))
   }
 
   createSubscription(projectId: string, request: NewSubscriptionRequest){
