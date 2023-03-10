@@ -52,3 +52,9 @@ This application is meant to assist in local development of software related to 
     npm run start
     ```
 6. You should now be able to develop and have changes trigger refreshes on the webapp!
+
+---
+### Additional Info
+LICENSE: MIT
+
+Feel free to do whatever you want, all improvements and suggestions are welcome!
