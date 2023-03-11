@@ -8,7 +8,7 @@ import { NewSubscriptionRequest } from '../components/subscription-list/new-subs
 })
 export class PubsubService {
   public project_id = ""
-  public currentHost = "http://host.docker.internal:8538"
+  public currentHost = "__EMULATOR_HOST_PROXY_URL__";
 
   private _projectList = new BehaviorSubject<string[]>(["test-project"])
   private _currentProject = new ReplaySubject<string>()

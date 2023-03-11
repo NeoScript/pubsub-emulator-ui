@@ -27,9 +27,7 @@ export class ProjectsComponent implements OnInit {
       this.currentProject = qpm.get("project") ?? undefined
 
       console.log("loaded project: ", this.currentProject)
-
       this.pubsub.selectProject(this.currentProject!)
-
       this.topicList$ = this.pubsub.listTopics(this.currentProject).pipe(
         tap(topics => console.log("topics have loaded", topics))
       )
