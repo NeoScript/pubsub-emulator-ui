@@ -7,8 +7,8 @@ import { NewSubscriptionRequest } from '../components/subscription-list/new-subs
   providedIn: 'root'
 })
 export class PubsubService {
-  project_id = "test-project"
-  public currentHost = "http://localhost:8681"
+  public project_id = ""
+  public currentHost = "http://host.docker.internal:8538"
 
   private _projectList = new BehaviorSubject<string[]>(["test-project"])
   private _currentProject = new ReplaySubject<string>()
@@ -29,6 +29,7 @@ export class PubsubService {
   }
 
   selectProject(projectId: string) {
+    this.project_id = projectId
     this._currentProject.next(projectId)
   }
 
@@ -39,7 +40,7 @@ export class PubsubService {
     this._projectList.next(newList)
   }
 
-  createTopic(projectId: string = this.project_id, topicId: string){
+  createTopic(projectId: string = this.project_id, topicId: string) {
     const url = `${this.currentHost}/v1/projects/${projectId}/topics/${topicId}`
 
     return this.http.put<Topic>(url, {})
@@ -49,13 +50,13 @@ export class PubsubService {
     return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming?.topics || []))
   }
 
-  createSubscription(projectId: string, request: NewSubscriptionRequest){
+  createSubscription(projectId: string, request: NewSubscriptionRequest) {
     const url = `${this.currentHost}/v1/projects/${projectId}/subscriptions/${request.name}`
 
-    return this.http.put<Subscription>(url, {topic: request.topic, pushConfig: request.pushConfig})
+    return this.http.put<Subscription>(url, { topic: request.topic, pushConfig: request.pushConfig })
   }
 
-  deleteSubscription(subscriptionPath: string){
+  deleteSubscription(subscriptionPath: string) {
     const url = `${this.currentHost}/v1/${subscriptionPath}`
     return this.http.delete(url)
   }
@@ -64,8 +65,8 @@ export class PubsubService {
     return this.http.get<{ subscriptions?: string[] }>(`${this.currentHost}/v1/projects/${this.project_id}/subscriptions`)
       .pipe(
         map(incoming => incoming.subscriptions), // first we pull out the subscriptions object
-        map(subNames => subNames??[]),
-        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription)) ) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
+        map(subNames => subNames ?? []),
+        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
       )
   }
 
@@ -76,12 +77,12 @@ export class PubsubService {
     return this.http.get<{ subscriptions?: string[] }>(url)
       .pipe(
         map(incoming => incoming.subscriptions),
-        map(subNames => subNames??[]),
+        map(subNames => subNames ?? []),
         map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
       )
   }
 
-  getSubscriptionDetails(subscriptionPath: string){
+  getSubscriptionDetails(subscriptionPath: string) {
     const url = `${this.currentHost}/v1/${subscriptionPath}`
     return this.http.get<Subscription>(url)
   }
@@ -94,14 +95,14 @@ export class PubsubService {
       ).pipe(map(incoming => incoming.receivedMessages ?? []))
   }
 
-  ackMessage(subscriptionPath:string, ackIds: string[]){
+  ackMessage(subscriptionPath: string, ackIds: string[]) {
     const url = `${this.currentHost}/v1/${subscriptionPath}:acknowledge`
-    return this.http.post(url, {ackIds})
+    return this.http.post(url, { ackIds })
   }
 
-  publishMessages(topicPath: string, messages: PubsubMessage[]){
+  publishMessages(topicPath: string, messages: PubsubMessage[]) {
     const url = `${this.currentHost}/v1/${topicPath}:publish`
-    return this.http.post<{messageIds: string[]}>(url, {messages})
+    return this.http.post<{ messageIds: string[] }>(url, { messages })
   }
 }
 
@@ -129,7 +130,7 @@ export interface PubsubMessage {
   orderingKey?: string
 }
 
-export interface PushConfig{
+export interface PushConfig {
   pushEndpoint: string
-  attributes?: {[key: string]: string}
+  attributes?: { [key: string]: string }
 }

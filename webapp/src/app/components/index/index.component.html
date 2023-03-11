@@ -1,19 +1,17 @@
 <div class="container">
     <div class="header">
-        <h3>Select a Project from the list:</h3>
-        <p class="caption">Or Create a new one!</p>
+        <h3></h3>
+        <p class="caption"></p>
     </div>
 
-    <div class="project-list">
 
-        <button mat-raised-button class="project" *ngFor="let project of (this.projectList$|async)"
-        [routerLink]="['project']" [queryParams]="{'project': project}">
-            {{project}}
-        </button>
+    <div style="margin: 10px; padding: 10px;">
+        <input type="text" id="manualProject" placeholder="PROJECT_ID" style="margin: 10px;padding: 18px 10px;">
 
-        <button mat-stroked-button class="new-project">
+        <button mat-raised-button class="project" [routerLink]="['project']" [queryParams]="{'project': getValue()}"
+            style="margin: 10px;padding: 10px 55px;">
             <mat-icon>add_circle</mat-icon>
-            Attach new project
+            Attach
         </button>
     </div>
 </div>
