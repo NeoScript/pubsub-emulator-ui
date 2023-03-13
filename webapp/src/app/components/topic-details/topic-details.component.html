@@ -6,7 +6,21 @@
     </button>
 </div>
 
-<mat-form-field appearance="outline" class="text-field">
-    <textarea matInput [cdkTextareaAutosize]="true" cdkAutosizeMinRows="15" [formControl]="this.inputField"></textarea>
-</mat-form-field>
+<div>
+    Message attributes:
+    <mat-form-field appearance="outline" [style.width]="'30%'" class="msgattr">
+        <mat-label>Key</mat-label>
+        <input matInput type="text" autocomplete="off" [formControl]="this.keyField">
+    </mat-form-field>
 
+    <mat-form-field appearance="outline" [style.width]="'30%'" class="msgattr">
+        <mat-label>Value</mat-label>
+        <input matInput type="text" autocomplete="off" [formControl]="this.valueField">
+    </mat-form-field>
+</div>
+
+
+<mat-form-field appearance="outline" class="text-field">
+    <textarea matInput [cdkTextareaAutosize]="true" cdkAutosizeMinRows="15" [formControl]="this.inputField" placeholder="1. Valid JSON only (Prettified works)
+2. Protobuf payload doesn't work. Duh!"></textarea>
+</mat-form-field>
