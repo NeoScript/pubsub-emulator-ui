@@ -24,7 +24,7 @@ export class TopicDetailsComponent implements OnInit {
 
   publishMessage() {
     console.log("inputField: ", this.inputField.value)
-    console.log("publishMessage(): ", this.keyField.value)
+    console.log("keyField: ", this.keyField.value)
     console.log("valueField: ", this.valueField.value)
 
     let attr = {
