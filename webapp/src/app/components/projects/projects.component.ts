@@ -42,15 +42,15 @@ export class ProjectsComponent implements OnInit {
 
   handlePublishRequest(event: { topic: Topic, message: string, attributes: {} }) {
     console.log("publish message request:", event.message)
-    console.log("publish message request:", event.attributes)
+    console.log("publish message attributes:", event.attributes)
 
     const pubsubMessage: PubsubMessage = {
-      data: btoa(JSON.parse(JSON.stringify(event.message))),
+      data: btoa(event.message),
       attributes: event.attributes
     }
 
     this.pubsub.publishMessages(event.topic.name, [pubsubMessage]).subscribe(result => {
-      console.log(pubsubMessage)
+      console.log("-->", pubsubMessage)
       console.log("published to ids", result.messageIds)
     })
   }
