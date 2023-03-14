@@ -9,7 +9,7 @@ RUN npm install
 RUN npm run build
 
 # Runner
-FROM amd64/nginx:alpine as serve
+FROM amd64/nginx:alpine as run
 
 WORKDIR /usr/share/nginx/html
 

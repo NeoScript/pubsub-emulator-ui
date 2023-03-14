@@ -45,7 +45,7 @@ export class ProjectsComponent implements OnInit {
     console.log("publish message attributes:", event.attributes)
 
     const pubsubMessage: PubsubMessage = {
-      data: btoa(event.message),
+      data: btoa(JSON.parse(JSON.stringify(event.message))),
       attributes: event.attributes
     }
 

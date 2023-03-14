@@ -10,7 +10,7 @@ export class PubsubService {
   public project_id = ""
   public currentHost = "__EMULATOR_HOST_PROXY_URL__";
 
-  private _projectList = new BehaviorSubject<string[]>(["test-project"])
+  private _projectList = new BehaviorSubject<string[]>([])
   private _currentProject = new ReplaySubject<string>()
   private _currentTopic = new ReplaySubject<Topic>()
   private _currentSubscription = new ReplaySubject<Subscription>()
