@@ -41,8 +41,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   handlePublishRequest(event: { topic: Topic, message: string, attributes: {} }) {
-    console.log("publish message request:", event.message)
-    console.log("publish message attributes:", event.attributes)
+    console.log("published message:", event.message)
+    console.log("published attributes:", event.attributes)
 
     const pubsubMessage: PubsubMessage = {
       data: btoa(JSON.parse(JSON.stringify(event.message))),

@@ -23,6 +23,9 @@ import { SubscriptionListComponent } from './components/subscription-list/subscr
 import { TopicDetailsComponent } from './components/topic-details/topic-details.component';
 import { NewTopicDialogComponent } from './components/topic-list/new-topic-dialog/new-topic-dialog.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
+import { AngularMaterialCheckboxComponent } from './angular-material-checkbox/angular-material-checkbox.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 
 
@@ -38,7 +41,8 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
     SubscriptionDetailsComponent,
     TopicDetailsComponent,
     NewTopicDialogComponent,
-    NewSubscriptionDialogComponent
+    NewSubscriptionDialogComponent,
+    AngularMaterialCheckboxComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,7 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-
+    MatCheckboxModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
