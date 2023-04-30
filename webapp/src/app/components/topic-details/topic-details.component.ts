@@ -75,7 +75,6 @@ export class TopicDetailsComponent implements OnInit {
 
   onFormBlur() {
     try {
-      this.errorMessage = ''
       JSON.parse(this.inputField.value)
     } catch (err) {
       this.errorMessage = "JSON is not valid: " + err
