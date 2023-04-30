@@ -28,5 +28,7 @@
 
 <mat-form-field appearance="outline" class="text-field">
     <textarea matInput [cdkTextareaAutosize]="true" cdkAutosizeMinRows="15" [formControl]="this.inputField"
-        placeholder="Valid JSON required (Prettified works)"></textarea>
+        placeholder="Valid JSON required (Prettified works)" (blur)="this.onFormBlur()"></textarea>
 </mat-form-field>
+
+<div *ngIf="this.errorMessage" style="color: 'red'">{{this.errorMessage}}</div>

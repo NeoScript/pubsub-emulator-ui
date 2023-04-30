@@ -14,6 +14,7 @@ export class TopicDetailsComponent implements OnInit {
   @Output() onMessagePublish = new EventEmitter<{ topic: Topic, message: string, attributes: object }>()
 
   public inputField = new FormControl('', Validators.required)
+  public errorMessage = ''
   public keyField = new FormControl('event')
   public valueField = new FormControl('')
   public checkBox = new FormControl(true)
@@ -27,6 +28,8 @@ export class TopicDetailsComponent implements OnInit {
   }
 
   publishMessage() {
+    if (this.errorMessage) return;
+
     let attr = {
       rawjson: ""
     }
@@ -69,4 +72,13 @@ export class TopicDetailsComponent implements OnInit {
 
     return obj;
   };
+
+  onFormBlur() {
+    try {
+      this.errorMessage = ''
+      JSON.parse(this.inputField.value)
+    } catch (err) {
+      this.errorMessage = "JSON is not valid: " + err
+    }
+  }
 }
