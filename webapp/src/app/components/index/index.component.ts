@@ -8,6 +8,7 @@ import { PubsubService } from 'src/app/services/pubsub.service';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
+  project_id = '';
 
   projectList$: Observable<string[]>
 
@@ -18,4 +19,7 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getValue() {
+    return (document.getElementById("manualProject") as HTMLInputElement).value
+  }
 }
