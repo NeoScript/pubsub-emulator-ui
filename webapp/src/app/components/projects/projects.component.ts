@@ -45,7 +45,7 @@ export class ProjectsComponent implements OnInit {
     let messObj = {};
     try{ messObj = JSON.parse(event.message); } 
     catch(error) { console.log("Message is not JSON Object thus old logic is used") }; 
-    const pubsubMessage: PubsubMessage;
+    let pubsubMessage: PubsubMessage;
     if(messObj?.data !== undefined){      
        pubsubMessage = {
         data: btoa(JSON.stringify(messObj?.data)),
