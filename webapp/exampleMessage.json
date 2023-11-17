@@ -1,0 +1,16 @@
+{
+    "data": {
+      "name": "projects/.../../...",
+      "createTime": "2023-11-14T17:37:39.884736Z",
+      "furtherObjects": "ENABLED",
+      "furtherObjects2": {
+        "furtherSubObjects": {}
+      },
+      "furtherObjects3": "\"160a203e401ec0\"",
+      "furtherObjects4": true
+    },
+    "attributes": {
+      "pubSubMessageAttributes": "projects/175091777038/secrets/env",
+      "versionId": "projects/.../../..."
+    }
+  }

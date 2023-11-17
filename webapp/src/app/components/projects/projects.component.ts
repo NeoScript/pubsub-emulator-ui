@@ -42,9 +42,19 @@ export class ProjectsComponent implements OnInit {
 
   handlePublishRequest(event: { topic: Topic, message: string }) {
     console.log("publish message request:", event.message)
-
-    const pubsubMessage: PubsubMessage = {
-      data: btoa(event.message)
+    let messObj = {};
+    try{ messObj = JSON.parse(event.message); } 
+    catch(error) { console.log("Message is not JSON Object thus old logic is used") }; 
+    const pubsubMessage: PubsubMessage;
+    if(messObj?.data !== undefined){      
+       pubsubMessage = {
+        data: btoa(JSON.stringify(messObj?.data)),
+        attributes: messObj?.attributes
+      };
+    } else {
+        pubsubMessage = {
+        data: btoa(event.message)
+      }
     }
 
     this.pubsub.publishMessages(event.topic.name, [pubsubMessage]).subscribe(result => {
