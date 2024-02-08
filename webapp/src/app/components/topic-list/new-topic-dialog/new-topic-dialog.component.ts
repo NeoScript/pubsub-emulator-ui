@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -9,7 +9,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class NewTopicDialogComponent implements OnInit {
 
-  topicName = new FormControl('', Validators.required)
+  topicName = new UntypedFormControl('', Validators.required)
   constructor(private ref: MatDialogRef<NewTopicDialogComponent>) { }
 
   ngOnInit(): void {

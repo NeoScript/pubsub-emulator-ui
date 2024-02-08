@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { Topic } from 'src/app/services/pubsub.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class TopicDetailsComponent implements OnInit {
 
   @Output() onMessagePublish = new EventEmitter<{ topic: Topic, message: string }>()
 
-  public inputField = new FormControl('', Validators.required)
+  public inputField = new UntypedFormControl('', Validators.required)
   constructor() { }
 
   ngOnInit(): void {
