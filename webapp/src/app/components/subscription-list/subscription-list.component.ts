@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { firstValueFrom } from 'rxjs';
 import { Subscription, Topic } from 'src/app/services/pubsub.service';
 import { NewSubscriptionDialogComponent, NewSubscriptionRequest } from './new-subscription-dialog/new-subscription-dialog.component';
