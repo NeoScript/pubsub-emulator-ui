@@ -109,7 +109,6 @@
       }
     }
   },
-  "defaultProject": "webapp",
   "cli": {
     "analytics": false
   }

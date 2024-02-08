@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PushConfig, Topic } from 'src/app/services/pubsub.service';
 
@@ -13,8 +13,8 @@ export class NewSubscriptionDialogComponent implements OnInit {
   configType?: string
   topic?: Topic
 
-  subscriptionForm = new FormControl('', Validators.required)
-  endpointForm = new FormControl('', Validators.required)
+  subscriptionForm = new UntypedFormControl('', Validators.required)
+  endpointForm = new UntypedFormControl('', Validators.required)
 
   constructor(private ref: MatDialogRef<NewSubscriptionDialogComponent, NewSubscriptionRequest>) { }
 
