@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: ghcr.io/neoscript/pubsub-emulator-ui:latest
+  IMAGE_NAME: ghcr.io/neoscript/pubsub-emulator-ui:v1.1.1
 
 jobs:
   push:
