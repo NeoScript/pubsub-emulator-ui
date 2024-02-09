@@ -27,6 +27,10 @@ export class PubsubService {
       this._currentHost$.next(prevHost)
     }
 
+    const prevProjects = localStorage.getItem("projects") ?? "[]"
+    const projects: string[] = JSON.parse(prevProjects) ?? []
+    this._projectList.next(projects)
+
     this.currentProject$.subscribe(project =>
       this.topicList$ = this.listTopics(project)
     )
@@ -47,6 +51,9 @@ export class PubsubService {
     newList.push(newProject)
 
     this._projectList.next(newList)
+
+    const jsonList = JSON.stringify(newList)
+    localStorage.setItem("projects", jsonList)
   }
 
   createTopic(projectId: string, topicId: string){
