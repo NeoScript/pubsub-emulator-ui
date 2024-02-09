@@ -25,9 +25,9 @@ export class IndexComponent implements OnInit {
 
     ref.afterClosed()
       .pipe(filter(r => !!r))
-      .subscribe((result: { project_id: string }) => {
+      .subscribe((result: { user_input: string }) => {
         console.log(result)
-        this.pubsub.attachProject(result.project_id)
+        this.pubsub.attachProject(result.user_input)
       })
   }
 

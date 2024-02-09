@@ -11,7 +11,15 @@
         </div>
     
         <div class="config">
-            <h4>current host: {{this.currentHost}}</h4>
+            <div class="links">
+                <button mat-icon-button (click)="updateHostUrl()">
+                    <mat-icon>settings</mat-icon>
+                </button>
+
+                @if (this.currentHost|async; as host) {
+                    <h4>current host: <a [href]="host">{{host}}</a></h4>
+                }
+            </div>
         </div>
     </div>
 
