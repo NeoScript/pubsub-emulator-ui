@@ -7,10 +7,9 @@ import { NewSubscriptionRequest } from '../components/subscription-list/new-subs
   providedIn: 'root'
 })
 export class PubsubService {
-  project_id = "test-project"
   public currentHost = "http://localhost:8681"
 
-  private _projectList = new BehaviorSubject<string[]>(["test-project"])
+  private _projectList = new BehaviorSubject<string[]>([])
   private _currentProject = new ReplaySubject<string>()
   private _currentTopic = new ReplaySubject<Topic>()
   private _currentSubscription = new ReplaySubject<Subscription>()
@@ -39,14 +38,14 @@ export class PubsubService {
     this._projectList.next(newList)
   }
 
-  createTopic(projectId: string = this.project_id, topicId: string){
+  createTopic(projectId: string, topicId: string){
     const url = `${this.currentHost}/v1/projects/${projectId}/topics/${topicId}`
 
     return this.http.put<Topic>(url, {})
   }
 
-  listTopics(projectId: string = this.project_id) {
-    return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${this.project_id}/topics`).pipe(map(incoming => incoming?.topics || []))
+  listTopics(projectId: string) {
+    return this.http.get<{ topics: Topic[] }>(`${this.currentHost}/v1/projects/${projectId}/topics`).pipe(map(incoming => incoming?.topics || []))
   }
 
   createSubscription(projectId: string, request: NewSubscriptionRequest){
@@ -60,8 +59,8 @@ export class PubsubService {
     return this.http.delete(url)
   }
 
-  listSubscriptions(): Observable<Subscription[]> {
-    return this.http.get<{ subscriptions?: string[] }>(`${this.currentHost}/v1/projects/${this.project_id}/subscriptions`)
+  listSubscriptions(projectId: string): Observable<Subscription[]> {
+    return this.http.get<{ subscriptions?: string[] }>(`${this.currentHost}/v1/projects/${projectId}/subscriptions`)
       .pipe(
         map(incoming => incoming.subscriptions), // first we pull out the subscriptions object
         map(subNames => subNames??[]),
