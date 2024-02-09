@@ -1,9 +1,9 @@
 <mat-dialog-content>
-    <mat-form-field appearance="outline" color="accent">
+    <mat-form-field appearance="outline" color="accent" style="min-width: 20em;">
         <mat-label>Enter a value</mat-label>
         <input matInput type="text" autocomplete="off" [formControl]="input">
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button [disabled]="input.invalid" (click)="save()">save</button>
+    <button mat-raised-button color="accent" [disabled]="input.invalid" (click)="save()">save</button>
 </mat-dialog-actions>
