@@ -16,7 +16,7 @@ export class ProjectsComponent implements OnInit {
   topicList2$: Observable<Topic[]> = EMPTY
   subscriptionList$: Observable<Subscription[]> = EMPTY
 
-  currentProject?: string
+  currentProject: string = ""
   currentTopic?: Topic
   currentSubscription?: Subscription
 
@@ -24,7 +24,7 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(qpm => {
-      this.currentProject = qpm.get("project") ?? undefined
+      this.currentProject = qpm.get("project") ?? ""
 
       console.log("loaded project: ", this.currentProject)
       this.pubsub.selectProject(this.currentProject!)

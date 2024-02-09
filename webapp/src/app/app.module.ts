@@ -38,7 +38,8 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
     SubscriptionDetailsComponent,
     TopicDetailsComponent,
     NewTopicDialogComponent,
-    NewSubscriptionDialogComponent
+    NewSubscriptionDialogComponent,
+  
   ],
   imports: [
     BrowserModule,
