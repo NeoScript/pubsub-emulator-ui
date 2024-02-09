@@ -21,7 +21,7 @@ export class InputDialogComponent {
   }
 
   save(){
-    this.dialogRef.close({project_id: this.input.value})
+    this.dialogRef.close({user_input: this.input.value})
   }
 
 }
