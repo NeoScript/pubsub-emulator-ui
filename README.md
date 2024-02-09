@@ -1,25 +1,17 @@
 # PubSub Emulator UI
+This application is meant to assist in local development of software related to Google Pub/Sub. This will allow one to view and create pubsub messages as well as create topics + pull subscriptions on a locally hosted instance of the pubsub emulator
 
 ## Quickstart
 
-1. download the docker-compose.yml
-2. Spin up the emulator + ui
-    ```
-    docker-compose up
-    ```
-3. You will have a pubsub emulator running with the project name: `test-project`
-    - feel free to modify the topic + subscriptions in the docker compose for your needs
-4. Run docker ps to list the running containers so that you can see the ports you need to connect to
-    - by default emulator on 8681, ui on 7200 (you can change this in docker-compose)
-
-
-## Introduction
-This application is meant to assist in local development of software related to Google Pub/Sub.
-
-### Screenshots
-[![Screenshot-from-2022-05-15-15-47-40.png](https://i.postimg.cc/Fzy9cv7Q/Screenshot-from-2022-05-15-15-47-40.png)](https://postimg.cc/wRB88SXW)
-
-[![Screenshot-from-2022-05-15-15-48-34.png](https://i.postimg.cc/2jhjgQTX/Screenshot-from-2022-05-15-15-48-34.png)](https://postimg.cc/CdMVqf3j)
+1. Utilize docker to run the pubsub emulator ui
+   ```
+   docker run -p 4200:80 ghcr.io/neoscript/pubsub-emulator-ui:latest
+   ```
+   - Note if you want to also spin up an instance of the pubsub emulator take a look at the [`docker-compose.yml`](https://github.com/NeoScript/pubsub-emulator-ui/blob/main/docker-compose.yml) file in this project's root 😉
+2. Add the project you would like to track
+   ![Screenshot from 2024-02-09 09-15-28](https://github.com/NeoScript/pubsub-emulator-ui/assets/3144162/7eab63e9-361e-45f4-9d29-714e6c286bb3)
+3. Now add topics/subscribers and send/receive messages as you would like 😄
+   ![Screenshot from 2024-02-09 09-16-26](https://github.com/NeoScript/pubsub-emulator-ui/assets/3144162/a5b6523a-30e8-4cdd-a4e6-620c58152067)
 
 ### Motivations
  - The current Google Pub/Sub emulator does not have any visual tooling
@@ -34,7 +26,7 @@ This application is meant to assist in local development of software related to 
     git clone https://github.com/NeoScript/pubsub-ui.git
     ```
 2. Then open the folder with VSCode
-    - VSCode is NOT required, but I've got some .devcontainers setup that may be helpful
+    - vscode is not required, but I've got a .devcontainers setup that may be helpful
     ```
     cd pubsub-ui
     code .
@@ -43,8 +35,7 @@ This application is meant to assist in local development of software related to 
     - To learn more about devcontainers check out [this link](https://code.visualstudio.com/docs/remote/containers)
 4. Spin up the supporting docker-compose file
     - note: we are currently spinning up [this very helpful wrapper](https://github.com/marcelcorso/gcloud-pubsub-emulator) around the emulator.
-    - additionally I have the [gcp-pubsub-emulator-ui](https://github.com/echocode-io/gcp-pubsub-emulator-ui) image spinning up as well just so I can use it as a reference for some functionality
-    - at some point we may try and transition to just spinning up the gcloud sdk itself
+    - at some point we may try and transition to just spinning up the gcloud sdk itself (if anyone knows an easy way, tell me!)
 
 5. Start serving the angular webapp
     ```
@@ -57,4 +48,4 @@ This application is meant to assist in local development of software related to 
 ### Additional Info
 LICENSE: MIT
 
-Feel free to do whatever you want, all improvements and suggestions are welcome!
+All improvements and suggestions are welcome!
