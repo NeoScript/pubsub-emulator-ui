@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,38 +27,29 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
 
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    IndexComponent,
-    ProjectsComponent,
-    NavbarComponent,
-    TopicListComponent,
-    SubscriptionListComponent,
-    SubscriptionDetailsComponent,
-    TopicDetailsComponent,
-    NewTopicDialogComponent,
-    NewSubscriptionDialogComponent,
-  
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatListModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    MatStepperModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        IndexComponent,
+        ProjectsComponent,
+        NavbarComponent,
+        TopicListComponent,
+        SubscriptionListComponent,
+        SubscriptionDetailsComponent,
+        TopicDetailsComponent,
+        NewTopicDialogComponent,
+        NewSubscriptionDialogComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatListModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        MatStepperModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
