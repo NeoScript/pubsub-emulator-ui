@@ -1,17 +1,17 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { EMPTY, firstValueFrom, map, Observable } from 'rxjs';
 import { PubsubService, ReceivedMessage, Subscription } from 'src/app/services/pubsub.service';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSuffix } from '@angular/material/form-field';
 
 @Component({
-    selector: 'app-subscription-details',
-    templateUrl: './subscription-details.component.html',
-    styleUrls: ['./subscription-details.component.scss'],
-    standalone: true,
-    imports: [MatButton, MatIcon, MatSuffix, AsyncPipe, DatePipe]
+  selector: 'app-subscription-details',
+  templateUrl: './subscription-details.component.html',
+  styleUrls: ['./subscription-details.component.scss'],
+  standalone: true,
+  imports: [MatButton, MatIcon, MatSuffix, AsyncPipe, DatePipe, JsonPipe]
 })
 export class SubscriptionDetailsComponent implements OnInit {
   private pubsub = inject(PubsubService);
@@ -50,11 +50,11 @@ export class SubscriptionDetailsComponent implements OnInit {
     console.log('called with', data)
   }
 
-  async ackMessage(ackId: string){
+  async ackMessage(ackId: string) {
     const result = await firstValueFrom(this.pubsub.ackMessage(this.subscriptionPath!, [ackId]))
     console.log("result", result)
-    
-    if(Object.keys(result).length == 0){  // a valid response will be no content
+
+    if (Object.keys(result).length == 0) {  // a valid response will be no content
       this.messages = this.messages.filter(msg => msg.ackId != ackId)
     }
   }
