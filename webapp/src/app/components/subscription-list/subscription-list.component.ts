@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { Subscription, Topic } from 'src/app/services/pubsub.service';
@@ -15,6 +15,8 @@ import { MatIcon } from '@angular/material/icon';
     imports: [MatActionList, MatListItem, NgClass, MatIcon]
 })
 export class SubscriptionListComponent implements OnInit {
+  private dialog = inject(MatDialog);
+
 
   @Input() subscriptions?: Subscription[]
   @Input() topic?: Topic
@@ -22,7 +24,6 @@ export class SubscriptionListComponent implements OnInit {
   @Input() currentSubscription?: Subscription
   @Output() currentSubscriptionChange = new EventEmitter<Subscription>()
   @Output() newSubscriptionRequest = new EventEmitter<NewSubscriptionRequest>()
-  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {  Observable, filter } from 'rxjs';
 import { PubsubService } from 'src/app/services/pubsub.service';
@@ -17,9 +17,14 @@ import { AsyncPipe } from '@angular/common';
     imports: [MatToolbar, MatIconButton, RouterLink, MatIcon, AsyncPipe]
 })
 export class NavbarComponent implements OnInit {
+  private pubsub = inject(PubsubService);
+  private dialog = inject(MatDialog);
+
 
   currentHost: Observable<string>
-  constructor(private pubsub: PubsubService, private dialog: MatDialog) {
+  constructor() {
+    const pubsub = this.pubsub;
+
     this.currentHost = pubsub._currentHost$.asObservable();
   }
 

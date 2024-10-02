@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UntypedFormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PushConfig, Topic } from 'src/app/services/pubsub.service';
@@ -18,14 +18,14 @@ import { MatButton } from '@angular/material/button';
     imports: [MatStepper, MatStep, MatStepLabel, MatActionList, MatListItem, MatStepperNext, MatIcon, MatFormField, MatLabel, MatHint, MatInput, ReactiveFormsModule, MatButton]
 })
 export class NewSubscriptionDialogComponent implements OnInit {
+  private ref = inject<MatDialogRef<NewSubscriptionDialogComponent, NewSubscriptionRequest>>(MatDialogRef);
+
 
   configType?: string
   topic?: Topic
 
   subscriptionForm = new UntypedFormControl('', Validators.required)
   endpointForm = new UntypedFormControl('', Validators.required)
-
-  constructor(private ref: MatDialogRef<NewSubscriptionDialogComponent, NewSubscriptionRequest>) { }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, filter } from 'rxjs';
 import { PubsubService } from 'src/app/services/pubsub.service';
@@ -16,10 +16,15 @@ import { MatIcon } from '@angular/material/icon';
     imports: [MatButton, RouterLink, MatIcon, AsyncPipe]
 })
 export class IndexComponent implements OnInit {
+  private pubsub = inject(PubsubService);
+  private matDialog = inject(MatDialog);
+
 
   projectList$: Observable<string[]>
 
-  constructor(private pubsub: PubsubService, private matDialog: MatDialog) {
+  constructor() {
+    const pubsub = this.pubsub;
+
     this.projectList$ = pubsub.projectList$
   }
 

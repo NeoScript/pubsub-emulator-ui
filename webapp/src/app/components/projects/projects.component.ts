@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, tap } from 'rxjs';
 import { PubsubMessage, PubsubService, Subscription, Topic } from 'src/app/services/pubsub.service';
@@ -17,6 +17,9 @@ import { TopicDetailsComponent } from '../topic-details/topic-details.component'
     imports: [TopicListComponent, SubscriptionListComponent, NgClass, SubscriptionDetailsComponent, TopicDetailsComponent, AsyncPipe]
 })
 export class ProjectsComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private pubsub = inject(PubsubService);
+
 
 
   topicList$: Observable<Topic[]> = EMPTY
@@ -26,8 +29,6 @@ export class ProjectsComponent implements OnInit {
   currentProject: string = ""
   currentTopic?: Topic
   currentSubscription?: Subscription
-
-  constructor(private route: ActivatedRoute, private pubsub: PubsubService) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(qpm => {

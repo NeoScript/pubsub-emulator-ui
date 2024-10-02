@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { EMPTY, firstValueFrom, map, Observable } from 'rxjs';
 import { PubsubService, ReceivedMessage, Subscription } from 'src/app/services/pubsub.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
@@ -14,13 +14,13 @@ import { MatSuffix } from '@angular/material/form-field';
     imports: [MatButton, MatIcon, MatSuffix, AsyncPipe, DatePipe]
 })
 export class SubscriptionDetailsComponent implements OnInit {
+  private pubsub = inject(PubsubService);
+
 
   @Input() subscriptionPath?: string
 
   details: Observable<Subscription> = EMPTY
   messages: ReceivedMessage[] = []
-
-  constructor(private pubsub: PubsubService) { }
 
   ngOnInit(): void {
     this.details = this.pubsub.getSubscriptionDetails(this.subscriptionPath!)
