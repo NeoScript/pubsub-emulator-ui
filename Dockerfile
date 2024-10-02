@@ -9,5 +9,5 @@ FROM nginx:alpine as serve
 COPY scripts/docker/docker_nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/share/nginx/html
-COPY --from=build /app/dist/webapp .
+COPY --from=build /app/dist/webapp/browser .
 EXPOSE 80

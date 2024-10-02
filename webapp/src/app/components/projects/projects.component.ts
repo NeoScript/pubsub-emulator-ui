@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, tap } from 'rxjs';
 import { PubsubMessage, PubsubService, Subscription, Topic } from 'src/app/services/pubsub.service';
 import { NewSubscriptionRequest } from '../subscription-list/new-subscription-dialog/new-subscription-dialog.component';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { TopicListComponent } from '../topic-list/topic-list.component';
+import { SubscriptionListComponent } from '../subscription-list/subscription-list.component';
+import { SubscriptionDetailsComponent } from '../subscription-details/subscription-details.component';
+import { TopicDetailsComponent } from '../topic-details/topic-details.component';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+    selector: 'app-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: ['./projects.component.scss'],
+    standalone: true,
+    imports: [TopicListComponent, SubscriptionListComponent, NgClass, SubscriptionDetailsComponent, TopicDetailsComponent, AsyncPipe]
 })
 export class ProjectsComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private pubsub = inject(PubsubService);
+
 
 
   topicList$: Observable<Topic[]> = EMPTY
@@ -19,8 +29,6 @@ export class ProjectsComponent implements OnInit {
   currentProject: string = ""
   currentTopic?: Topic
   currentSubscription?: Subscription
-
-  constructor(private route: ActivatedRoute, private pubsub: PubsubService) { }
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(qpm => {

@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubscriptionDetailsComponent } from './subscription-details.component';
 
@@ -9,9 +9,9 @@ describe('SubscriptionDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SubscriptionDetailsComponent ],
-      imports: [HttpClientModule]
-    })
+    imports: [SubscriptionDetailsComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
     .compileComponents();
   });
 

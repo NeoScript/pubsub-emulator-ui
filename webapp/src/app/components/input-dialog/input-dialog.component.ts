@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -13,12 +13,10 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './input-dialog.component.scss'
 })
 export class InputDialogComponent {
+  private dialogRef = inject<MatDialogRef<InputDialogComponent>>(MatDialogRef);
+
 
   input = new FormControl('', Validators.required)
-
-  constructor(private dialogRef: MatDialogRef<InputDialogComponent>){
-
-  }
 
   save(){
     this.dialogRef.close({user_input: this.input.value})

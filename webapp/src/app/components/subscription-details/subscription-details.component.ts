@@ -1,20 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { EMPTY, firstValueFrom, map, Observable } from 'rxjs';
 import { PubsubService, ReceivedMessage, Subscription } from 'src/app/services/pubsub.service';
+import { AsyncPipe, DatePipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSuffix } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-subscription-details',
-  templateUrl: './subscription-details.component.html',
-  styleUrls: ['./subscription-details.component.scss']
+    selector: 'app-subscription-details',
+    templateUrl: './subscription-details.component.html',
+    styleUrls: ['./subscription-details.component.scss'],
+    standalone: true,
+    imports: [MatButton, MatIcon, MatSuffix, AsyncPipe, DatePipe]
 })
 export class SubscriptionDetailsComponent implements OnInit {
+  private pubsub = inject(PubsubService);
+
 
   @Input() subscriptionPath?: string
 
   details: Observable<Subscription> = EMPTY
   messages: ReceivedMessage[] = []
-
-  constructor(private pubsub: PubsubService) { }
 
   ngOnInit(): void {
     this.details = this.pubsub.getSubscriptionDetails(this.subscriptionPath!)

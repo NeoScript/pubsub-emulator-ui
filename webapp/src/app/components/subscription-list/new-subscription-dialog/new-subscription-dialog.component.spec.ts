@@ -8,8 +8,8 @@ describe('NewSubscriptionDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewSubscriptionDialogComponent ]
-    })
+    imports: [NewSubscriptionDialogComponent]
+})
     .compileComponents();
   });
 

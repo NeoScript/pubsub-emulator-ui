@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, EMPTY, map, Observable, ReplaySubject } from 'rxjs';
 import { NewSubscriptionRequest } from '../components/subscription-list/new-subscription-dialog/new-subscription-dialog.component';
 
@@ -7,6 +7,8 @@ import { NewSubscriptionRequest } from '../components/subscription-list/new-subs
   providedIn: 'root'
 })
 export class PubsubService {
+  private http = inject(HttpClient);
+
   public _currentHost$ = new BehaviorSubject<string>("http://localhost:8681")
 
   private _projectList = new BehaviorSubject<string[]>([])
@@ -20,7 +22,7 @@ export class PubsubService {
   public currentTopic$ = this._currentTopic.asObservable()
   public currentSubscription$ = this._currentSubscription.asObservable()
 
-  constructor(private http: HttpClient) {
+  constructor() {
     const prevHost = localStorage.getItem("host")
     if(prevHost){
       console.log('loaded previous host', prevHost)
