@@ -10,8 +10,7 @@ describe('ProjectsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [ProjectsComponent],
-    imports: [AppRoutingModule],
+    imports: [AppRoutingModule, ProjectsComponent],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
     .compileComponents();

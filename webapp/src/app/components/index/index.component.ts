@@ -3,11 +3,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, filter } from 'rxjs';
 import { PubsubService } from 'src/app/services/pubsub.service';
 import { InputDialogComponent } from '../input-dialog/input-dialog.component';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+    selector: 'app-index',
+    templateUrl: './index.component.html',
+    styleUrls: ['./index.component.scss'],
+    standalone: true,
+    imports: [NgFor, MatButton, RouterLink, MatIcon, AsyncPipe]
 })
 export class IndexComponent implements OnInit {
 

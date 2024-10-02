@@ -9,8 +9,7 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [NavbarComponent],
-    imports: [],
+    imports: [NavbarComponent],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
     .compileComponents();

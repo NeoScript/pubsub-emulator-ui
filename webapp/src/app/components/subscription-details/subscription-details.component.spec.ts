@@ -9,8 +9,7 @@ describe('SubscriptionDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    declarations: [SubscriptionDetailsComponent],
-    imports: [],
+    imports: [SubscriptionDetailsComponent],
     providers: [provideHttpClient(withInterceptorsFromDi())]
 })
     .compileComponents();

@@ -3,11 +3,18 @@ import { MatDialog } from '@angular/material/dialog';
 import {  Observable, filter } from 'rxjs';
 import { PubsubService } from 'src/app/services/pubsub.service';
 import { InputDialogComponent } from '../input-dialog/input-dialog.component';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatIconButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    standalone: true,
+    imports: [MatToolbar, MatIconButton, RouterLink, MatIcon, AsyncPipe]
 })
 export class NavbarComponent implements OnInit {
 

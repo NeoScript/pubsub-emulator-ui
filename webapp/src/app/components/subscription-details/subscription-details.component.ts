@@ -1,11 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EMPTY, firstValueFrom, map, Observable } from 'rxjs';
 import { PubsubService, ReceivedMessage, Subscription } from 'src/app/services/pubsub.service';
+import { NgIf, NgFor, AsyncPipe, DatePipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSuffix } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-subscription-details',
-  templateUrl: './subscription-details.component.html',
-  styleUrls: ['./subscription-details.component.scss']
+    selector: 'app-subscription-details',
+    templateUrl: './subscription-details.component.html',
+    styleUrls: ['./subscription-details.component.scss'],
+    standalone: true,
+    imports: [NgIf, MatButton, MatIcon, MatSuffix, NgFor, AsyncPipe, DatePipe]
 })
 export class SubscriptionDetailsComponent implements OnInit {
 

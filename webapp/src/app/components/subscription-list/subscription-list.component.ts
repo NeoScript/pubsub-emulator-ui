@@ -3,11 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { Subscription, Topic } from 'src/app/services/pubsub.service';
 import { NewSubscriptionDialogComponent, NewSubscriptionRequest } from './new-subscription-dialog/new-subscription-dialog.component';
+import { MatActionList, MatListItem } from '@angular/material/list';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-subscription-list',
-  templateUrl: './subscription-list.component.html',
-  styleUrls: ['./subscription-list.component.scss']
+    selector: 'app-subscription-list',
+    templateUrl: './subscription-list.component.html',
+    styleUrls: ['./subscription-list.component.scss'],
+    standalone: true,
+    imports: [MatActionList, NgIf, NgFor, MatListItem, NgClass, MatIcon]
 })
 export class SubscriptionListComponent implements OnInit {
 

@@ -27,18 +27,7 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
 
 
 
-@NgModule({ declarations: [
-        AppComponent,
-        IndexComponent,
-        ProjectsComponent,
-        NavbarComponent,
-        TopicListComponent,
-        SubscriptionListComponent,
-        SubscriptionDetailsComponent,
-        TopicDetailsComponent,
-        NewTopicDialogComponent,
-        NewSubscriptionDialogComponent,
-    ],
+@NgModule({ declarations: [AppComponent],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -51,5 +40,13 @@ import { TopicListComponent } from './components/topic-list/topic-list.component
         MatInputModule,
         MatFormFieldModule,
         MatDialogModule,
-        MatStepperModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        MatStepperModule, IndexComponent,
+        ProjectsComponent,
+        NavbarComponent,
+        TopicListComponent,
+        SubscriptionListComponent,
+        SubscriptionDetailsComponent,
+        TopicDetailsComponent,
+        NewTopicDialogComponent,
+        NewSubscriptionDialogComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
