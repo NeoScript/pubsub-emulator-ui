@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { Topic } from 'src/app/services/pubsub.service';
 import { NewTopicDialogComponent } from './new-topic-dialog/new-topic-dialog.component';
 import { MatActionList, MatListItem } from '@angular/material/list';
-import { NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -12,7 +12,7 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './topic-list.component.html',
     styleUrls: ['./topic-list.component.scss'],
     standalone: true,
-    imports: [MatActionList, NgFor, MatListItem, NgClass, MatIcon]
+    imports: [MatActionList, MatListItem, NgClass, MatIcon]
 })
 export class TopicListComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import { MatActionList, MatListItem } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel, MatHint } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { NgIf } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 
 @Component({
@@ -15,7 +15,7 @@ import { MatButton } from '@angular/material/button';
     templateUrl: './new-subscription-dialog.component.html',
     styleUrls: ['./new-subscription-dialog.component.scss'],
     standalone: true,
-    imports: [MatStepper, MatStep, MatStepLabel, MatActionList, MatListItem, MatStepperNext, MatIcon, MatFormField, MatLabel, MatHint, MatInput, ReactiveFormsModule, NgIf, MatButton]
+    imports: [MatStepper, MatStep, MatStepLabel, MatActionList, MatListItem, MatStepperNext, MatIcon, MatFormField, MatLabel, MatHint, MatInput, ReactiveFormsModule, MatButton]
 })
 export class NewSubscriptionDialogComponent implements OnInit {
 

@@ -1,19 +1,20 @@
 <mat-action-list class="topic-list">
-    <button mat-list-item class="topic-item" *ngFor="let topic of this.topics"
-        [ngClass]="{'topic-item--selected': this.currentTopic == topic}" (click)="selectTopic(topic)">
-        <div class="topic-button">
-            <span> {{topic.name}}
-            </span>
-
-            <mat-icon>arrow_right</mat-icon>
-        </div>
+  @for (topic of this.topics; track topic) {
+    <button mat-list-item class="topic-item"
+      [ngClass]="{'topic-item--selected': this.currentTopic == topic}" (click)="selectTopic(topic)">
+      <div class="topic-button">
+        <span> {{topic.name}}
+        </span>
+        <mat-icon>arrow_right</mat-icon>
+      </div>
     </button>
+  }
 
-    <button mat-list-item class="topic-item" (click)="createNewTopic()">
-        <div class="topic-button">
-            <span>Create New Topic</span>
+  <button mat-list-item class="topic-item" (click)="createNewTopic()">
+    <div class="topic-button">
+      <span>Create New Topic</span>
 
-            <mat-icon>add</mat-icon>
-        </div>
-    </button>
+      <mat-icon>add</mat-icon>
+    </div>
+  </button>
 </mat-action-list>

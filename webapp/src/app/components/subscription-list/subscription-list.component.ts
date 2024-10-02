@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { Subscription, Topic } from 'src/app/services/pubsub.service';
 import { NewSubscriptionDialogComponent, NewSubscriptionRequest } from './new-subscription-dialog/new-subscription-dialog.component';
 import { MatActionList, MatListItem } from '@angular/material/list';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -12,7 +12,7 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './subscription-list.component.html',
     styleUrls: ['./subscription-list.component.scss'],
     standalone: true,
-    imports: [MatActionList, NgIf, NgFor, MatListItem, NgClass, MatIcon]
+    imports: [MatActionList, MatListItem, NgClass, MatIcon]
 })
 export class SubscriptionListComponent implements OnInit {
 

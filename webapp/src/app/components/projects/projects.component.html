@@ -1,38 +1,46 @@
 <div class="container">
-    <h1>Project: {{this.currentProject}}</h1>
+  <h1>Project: {{this.currentProject}}</h1>
 
-    <div class="header-container">
+  <div class="header-container">
 
-        <div class="topics" *ngIf="this.topicList$ | async as topicList">
-            <h2>Topics</h2>
-            <app-topic-list 
-            [topics]="topicList" 
-            [(currentTopic)]="this.currentTopic" 
-            (currentTopicChange)="loadSubsFor($event)"
-            (newTopicRequest)="this.handleNewTopicRequest($event)"></app-topic-list>
-        </div>
+    @if (this.topicList$ | async; as topicList) {
+      <div class="topics">
+        <h2>Topics</h2>
+        <app-topic-list
+          [topics]="topicList"
+          [(currentTopic)]="this.currentTopic"
+          (currentTopicChange)="loadSubsFor($event)"
+        (newTopicRequest)="this.handleNewTopicRequest($event)"></app-topic-list>
+      </div>
+    }
 
-        <div class="subscriptions" *ngIf="this.subscriptionList$ | async as possibleSubs">
-            <h2>Subscriptions</h2>
-            <app-subscription-list [topic]="this.currentTopic" [subscriptions]="possibleSubs" [(currentSubscription)]="this.currentSubscription" (newSubscriptionRequest)="this.handleNewSubscription($event)">
-            </app-subscription-list>
-        </div>
+    @if (this.subscriptionList$ | async; as possibleSubs) {
+      <div class="subscriptions">
+        <h2>Subscriptions</h2>
+        <app-subscription-list [topic]="this.currentTopic" [subscriptions]="possibleSubs" [(currentSubscription)]="this.currentSubscription" (newSubscriptionRequest)="this.handleNewSubscription($event)">
+        </app-subscription-list>
+      </div>
+    }
 
-    </div>
+  </div>
 
     <div class="main-container" [ngClass]="{
         'main-container--no-topic': this.currentTopic == undefined,
         'main-container--no-subscription': this.currentTopic != undefined && this.currentSubscription == undefined
     }">
-        <div *ngIf="this.currentTopic && this.currentSubscription">
-            <app-subscription-details [subscriptionPath]="this.currentSubscription.name"></app-subscription-details>
-        </div>
+    @if (this.currentTopic && this.currentSubscription) {
+      <div>
+        <app-subscription-details [subscriptionPath]="this.currentSubscription.name"></app-subscription-details>
+      </div>
+    }
 
-        <div *ngIf="this.currentTopic && !this.currentSubscription">
-            <app-topic-details [topic]="this.currentTopic" 
-            (onMessagePublish)="this.handlePublishRequest($event)"></app-topic-details>
-        </div>
+    @if (this.currentTopic && !this.currentSubscription) {
+      <div>
+        <app-topic-details [topic]="this.currentTopic"
+        (onMessagePublish)="this.handlePublishRequest($event)"></app-topic-details>
+      </div>
+    }
 
-    </div>
+  </div>
 
 </div>

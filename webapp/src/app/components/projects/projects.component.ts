@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, tap } from 'rxjs';
 import { PubsubMessage, PubsubService, Subscription, Topic } from 'src/app/services/pubsub.service';
 import { NewSubscriptionRequest } from '../subscription-list/new-subscription-dialog/new-subscription-dialog.component';
-import { NgIf, NgClass, AsyncPipe } from '@angular/common';
+import { NgClass, AsyncPipe } from '@angular/common';
 import { TopicListComponent } from '../topic-list/topic-list.component';
 import { SubscriptionListComponent } from '../subscription-list/subscription-list.component';
 import { SubscriptionDetailsComponent } from '../subscription-details/subscription-details.component';
@@ -14,7 +14,7 @@ import { TopicDetailsComponent } from '../topic-details/topic-details.component'
     templateUrl: './projects.component.html',
     styleUrls: ['./projects.component.scss'],
     standalone: true,
-    imports: [NgIf, TopicListComponent, SubscriptionListComponent, NgClass, SubscriptionDetailsComponent, TopicDetailsComponent, AsyncPipe]
+    imports: [TopicListComponent, SubscriptionListComponent, NgClass, SubscriptionDetailsComponent, TopicDetailsComponent, AsyncPipe]
 })
 export class ProjectsComponent implements OnInit {
 
