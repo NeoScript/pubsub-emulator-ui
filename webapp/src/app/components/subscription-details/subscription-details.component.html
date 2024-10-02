@@ -1,38 +1,40 @@
 @if (this.details|async; as subscription) {
-  <div class="content">
-    <h3>Subscription Details</h3>
-    <div class="header">
-      <div id="path">path: {{subscription.name}}</div>
-      <div id="topic">topic: {{subscription.topic}}</div>
-      <button id="pullMessagesBtn" mat-raised-button color="primary" (click)="this.pullMessages()">
-        Pull Messages
-        <mat-icon matSuffix>download</mat-icon>
-      </button>
-    </div>
-    <div class="message-pane">
-      <div>Messages Received: {{this.messages.length}}</div>
-      @if (this.messages) {
-        <table class="message-table mat-table">
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>Message</th>
-              <th>Ack</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (msg of this.messages; track msg) {
-              <tr class="pubsub-message">
-                <td>{{msg.message.publishTime | date : "long"}}</td>
-                <td>{{msg.message.data}}</td>
-                <td>
-                  <button mat-button color="warn" (click)="this.ackMessage(msg.ackId)">Ack</button>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      }
-    </div>
+<div class="content">
+  <h3>Subscription Details</h3>
+  <div class="header">
+    <div id="path">path: {{subscription.name}}</div>
+    <div id="topic">topic: {{subscription.topic}}</div>
+    <button id="pullMessagesBtn" mat-raised-button color="primary" (click)="this.pullMessages()">
+      Pull Messages
+      <mat-icon matSuffix>download</mat-icon>
+    </button>
   </div>
+  <div class="message-pane">
+    <div>Messages Received: {{this.messages.length}}</div>
+    @if (this.messages) {
+    <table class="message-table mat-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Message</th>
+          <th>Attributes</th>
+          <th>Ack</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (msg of this.messages; track msg) {
+        <tr class="pubsub-message">
+          <td>{{msg.message.publishTime | date : "long"}}</td>
+          <td>{{msg.message.data}}</td>
+          <td>{{msg.message.attributes | json}}</td>
+          <td>
+            <button mat-button color="warn" (click)="this.ackMessage(msg.ackId)">Ack</button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    }
+  </div>
+</div>
 }
