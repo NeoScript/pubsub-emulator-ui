@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, EMPTY, map, Observable, ReplaySubject } from 'rxjs';
 import { NewSubscriptionRequest } from '../components/subscription-list/new-subscription-dialog/new-subscription-dialog.component';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { NewSubscriptionRequest } from '../components/subscription-list/new-subs
 export class PubsubService {
   private http = inject(HttpClient);
 
-  public _currentHost$ = new BehaviorSubject<string>("http://localhost:8681")
+  public _currentHost$ = new BehaviorSubject<string>(environment.pubsubEmulatorHost)
 
   private _projectList = new BehaviorSubject<string[]>([])
   private _currentProject = new ReplaySubject<string>()

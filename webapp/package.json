@@ -1,13 +1,14 @@
 {
-  "name": "webapp",
-  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:ngssc": "ng run webapp:ngsscbuild:production"
   },
+  "name": "webapp",
+  "version": "0.0.3",
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.6",
@@ -20,6 +21,7 @@
     "@angular/platform-browser": "^18.2.6",
     "@angular/platform-browser-dynamic": "^18.2.6",
     "@angular/router": "^18.2.6",
+    "angular-server-side-configuration": "^18.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
