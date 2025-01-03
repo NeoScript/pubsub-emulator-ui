@@ -106,6 +106,20 @@
             ],
             "scripts": []
           }
+        },
+        "ngsscbuild": {
+          "builder": "angular-server-side-configuration:ngsscbuild",
+          "options": {
+            "additionalEnvironmentVariables": [
+              "PUBSUB_EMULATOR_HOST"
+            ],
+            "buildTarget": "webapp:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "webapp:build:production"
+            }
+          }
         }
       }
     }
