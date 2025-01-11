@@ -1,41 +1,42 @@
-<h3>Create a new subscription</h3>
+<mat-dialog-content>
+  <h3>Create a new subscription</h3>
 
-<mat-horizontal-stepper>
-  <mat-step color="accent">
-    <ng-template matStepLabel>Subscription Type</ng-template>
-    <p>Which type of subscription would you like to create?</p>
-    <mat-action-list>
-      <button mat-list-item matStepperNext (click)="setConfigType('pull')">
-        <mat-icon mat-list-icon>move_to_inbox</mat-icon>
-        <div mat-line>Pull Subscription</div>
-        <div mat-line class="caption">Subscribers must pull messages manually.</div>
-      </button>
+  <mat-horizontal-stepper>
+    <mat-step color="accent">
+      <ng-template matStepLabel>Subscription Type</ng-template>
+      <p>Which type of subscription would you like to create?</p>
+      <mat-action-list>
+        <button mat-list-item matStepperNext (click)="setConfigType('pull')">
+          <mat-icon matListItemIcon>move_to_inbox</mat-icon>
+          <div matListItemTitle>Pull Subscription</div>
+          <div matListItemLine>Subscribers must pull messages manually.</div>
+        </button>
 
-      <button mat-list-item matStepperNext (click)="setConfigType('push')">
-        <mat-icon mat-list-icon>send</mat-icon>
-        <div mat-line>Push Subscription</div>
-        <div mat-line class="caption">Messages will be forwarded to an endpoint.</div>
-      </button>
-    </mat-action-list>
-  </mat-step>
+        <button mat-list-item matStepperNext (click)="setConfigType('push')">
+          <mat-icon matListItemIcon>send</mat-icon>
+          <div matListItemTitle>Push Subscription</div>
+          <div matListItemLine>Messages will be forwarded to an endpoint.</div>
+        </button>
+      </mat-action-list>
+    </mat-step>
 
-  <mat-step color="accent">
-    <ng-template matStepLabel>Configuration</ng-template>
+    <mat-step color="accent">
+      <ng-template matStepLabel>Configuration</ng-template>
 
-    <div class="final-config">
-      <mat-form-field appearance="outline" [style.width]="'100%'" class="nameInput">
-        <mat-label>Enter subscription name</mat-label>
-        <mat-hint>becomes '/projects/project-name/subscriptions/{{this.subscriptionForm.value}}'</mat-hint>
-        <input matInput type="text" autocomplete="off" [formControl]="this.subscriptionForm">
-      </mat-form-field>
+      <div class="final-config">
+        <mat-form-field appearance="outline" [style.width]="'100%'" class="nameInput">
+          <mat-label>Enter subscription name</mat-label>
+          <mat-hint>becomes '/projects/project-name/subscriptions/{{this.subscriptionForm.value}}'</mat-hint>
+          <input matInput type="text" autocomplete="off" [formControl]="this.subscriptionForm">
+        </mat-form-field>
 
-      @if (this.configType === 'pull') {
+        @if (this.configType === 'pull') {
         <button mat-raised-button color="accent" (click)="createPullSubscription()"
           [disabled]="this.subscriptionForm.invalid">
           Create Pull Subscription
           <mat-icon>add</mat-icon>
         </button>
-      } @else {
+        } @else {
         <mat-form-field appearance="outline" [style.width]="'100%'" class="nameInput">
           <mat-label>Enter endpoint url</mat-label>
           <mat-hint>new messages will trigger this endpoint.</mat-hint>
@@ -46,9 +47,9 @@
           Create Push Subscription
           <mat-icon>add</mat-icon>
         </button>
-      }
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+        }
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 
-
+</mat-dialog-content>
