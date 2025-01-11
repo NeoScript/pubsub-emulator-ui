@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { UntypedFormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
-import { MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
+import { MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions } from '@angular/material/card';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
@@ -11,7 +11,7 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './new-topic-dialog.component.html',
   styleUrls: ['./new-topic-dialog.component.scss'],
   standalone: true,
-  imports: [MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatFormField, MatInput, ReactiveFormsModule, MatButton, MatDialogContent]
+  imports: [MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatFormField, MatInput, ReactiveFormsModule, MatButton, MatDialogContent, MatCardActions, FormsModule]
 })
 export class NewTopicDialogComponent implements OnInit {
   private ref = inject<MatDialogRef<NewTopicDialogComponent>>(MatDialogRef);

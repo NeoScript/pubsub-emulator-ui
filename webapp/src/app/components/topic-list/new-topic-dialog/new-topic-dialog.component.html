@@ -7,10 +7,14 @@
     </mat-card-header>
 
     <mat-card-content class="column-layout">
-        <mat-form-field appearance="outline">
-            <input matInput type="text" autocomplete="off" autofocus placeholder="New Topic ID"
-                [formControl]="this.topicName">
-        </mat-form-field>
-        <button mat-raised-button color="accent" (click)="this.submit()">Create Topic</button>
+        <form (ngSubmit)="this.submit()">
+            <mat-form-field appearance="outline">
+                <input matInput type="text" autocomplete="off" autofocus placeholder="New Topic ID"
+                    [formControl]="this.topicName">
+            </mat-form-field>
+        </form>
     </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="this.submit()">Create Topic</button>
+    </mat-card-actions>
 </mat-dialog-content>
