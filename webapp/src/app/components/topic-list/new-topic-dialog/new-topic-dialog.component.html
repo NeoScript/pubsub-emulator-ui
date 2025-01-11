@@ -1,13 +1,20 @@
-<mat-card-header>
-    <div class="column-layout">
-        <mat-card-title>Create Topic</mat-card-title>
-        <mat-card-subtitle>Topic will be created for: </mat-card-subtitle>
-    </div>
-</mat-card-header>
+<mat-dialog-content>
+    <mat-card-header>
+        <div class="column-layout">
+            <mat-card-title>Create Topic</mat-card-title>
+            <mat-card-subtitle>Topic will be created for: </mat-card-subtitle>
+        </div>
+    </mat-card-header>
 
-<mat-card-content class="column-layout">
-    <mat-form-field appearance="outline">
-        <input matInput type="text" autocomplete="off" autofocus placeholder="New Topic ID" [formControl]="this.topicName">
-    </mat-form-field>
-    <button mat-raised-button color="accent" (click)="this.submit()">Create Topic</button>
-</mat-card-content>
+    <mat-card-content class="column-layout">
+        <form (ngSubmit)="this.submit()">
+            <mat-form-field appearance="outline">
+                <input matInput type="text" autocomplete="off" autofocus placeholder="New Topic ID"
+                    [formControl]="this.topicName">
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="this.submit()">Create Topic</button>
+    </mat-card-actions>
+</mat-dialog-content>
