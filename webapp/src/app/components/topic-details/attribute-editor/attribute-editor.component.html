@@ -1,8 +1,6 @@
 <mat-dialog-content>
     <h2>Message Attributes</h2>
 
-
-
     @if(this.attributes){
     @for(entry of this.attributes | keyvalue; track entry.key){
     <div class="row">
@@ -14,17 +12,19 @@
             </button>
         </div>
     </div>
-
     }
     }
 
-    <mat-form-field appearance="outline">
-        <input matInput [formControl]="newKeyControl" placeholder="New Key">
-    </mat-form-field>
+    <div class="new-attribute-input">
+        <mat-form-field appearance="outline">
+            <input matInput [formControl]="newKeyControl" placeholder="New Key">
+        </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <input matInput [formControl]="newValueControl" placeholder="New Value">
-    </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput [formControl]="newValueControl" placeholder="New Value">
+        </mat-form-field>
+    </div>
+    <button mat-stroked-button id="add-button" (click)="addAttribute()">Add Attribute <mat-icon>add</mat-icon></button>
 
 </mat-dialog-content>
 

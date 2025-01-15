@@ -38,20 +38,23 @@ export class AttributeEditorComponent {
     delete this.attributes[key]
   }
 
-  discardChanges() {
-    this.dialogRef.close()
-  }
-
-  saveChanges() {
+  addAttribute() {
     if (this.newKeyControl.valid && this.newValueControl.valid) {
       const key = this.newKeyControl.value
       const value = this.newValueControl.value
 
       this.attributes[key!] = value!
-    } else {
-      // TODO: raise an error message
-    }
 
+      this.newKeyControl.reset()
+      this.newValueControl.reset()
+    }
+  }
+
+  discardChanges() {
+    this.dialogRef.close()
+  }
+
+  saveChanges() {
     this.dialogRef.close(this.attributes)
   }
 }
