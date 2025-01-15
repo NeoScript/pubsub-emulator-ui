@@ -1,11 +1,10 @@
 import { KeyValuePipe } from '@angular/common';
-import { Component, ComponentFactoryResolver, inject, input, signal, Signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatInput } from '@angular/material/input';
-import { MatList, MatListItem, MatListItemIcon } from '@angular/material/list';
 
 @Component({
   selector: 'app-attribute-editor',
