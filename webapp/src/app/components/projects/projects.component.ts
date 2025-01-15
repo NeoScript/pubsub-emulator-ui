@@ -10,11 +10,11 @@ import { SubscriptionDetailsComponent } from '../subscription-details/subscripti
 import { TopicDetailsComponent } from '../topic-details/topic-details.component';
 
 @Component({
-    selector: 'app-projects',
-    templateUrl: './projects.component.html',
-    styleUrls: ['./projects.component.scss'],
-    standalone: true,
-    imports: [TopicListComponent, SubscriptionListComponent, NgClass, SubscriptionDetailsComponent, TopicDetailsComponent, AsyncPipe]
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss'],
+  standalone: true,
+  imports: [TopicListComponent, SubscriptionListComponent, NgClass, SubscriptionDetailsComponent, TopicDetailsComponent, AsyncPipe]
 })
 export class ProjectsComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -48,11 +48,12 @@ export class ProjectsComponent implements OnInit {
     this.subscriptionList$ = this.pubsub.listSubscriptionsOnTopic(topic.name)
   }
 
-  handlePublishRequest(event: { topic: Topic, message: string }) {
+  handlePublishRequest(event: { topic: Topic, message: string, attributes: { [key: string]: string } }) {
     console.log("publish message request:", event.message)
 
     const pubsubMessage: PubsubMessage = {
-      data: btoa(event.message)
+      data: btoa(event.message),
+      attributes: event.attributes
     }
 
     this.pubsub.publishMessages(event.topic.name, [pubsubMessage]).subscribe(result => {
