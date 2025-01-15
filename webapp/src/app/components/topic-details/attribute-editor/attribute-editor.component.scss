@@ -1,0 +1,27 @@
+.split-view {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-attribute-input {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    justify-content: space-between;
+}
+
+#add-button {
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    width: 100%;
+}

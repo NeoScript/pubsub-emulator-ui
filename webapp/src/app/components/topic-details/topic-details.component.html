@@ -1,5 +1,8 @@
 <div class="header">
     <h3>Publish Message to topic: {{this.topic?.name}}</h3>
+    <button mat-stroked-button color="accent" (click)="editAttributes()">
+        Edit Attributes ({{this.attributeCount}})
+    </button>
     <button mat-raised-button color="primary" [disabled]="this.inputField.invalid" (click)="this.publishMessage()">
         Publish Message!
         <mat-icon>send</mat-icon>
@@ -9,4 +12,3 @@
 <mat-form-field appearance="outline" class="text-field">
     <textarea matInput [cdkTextareaAutosize]="true" cdkAutosizeMinRows="15" [formControl]="this.inputField"></textarea>
 </mat-form-field>
-

@@ -1,0 +1,34 @@
+<mat-dialog-content>
+    <h2>Message Attributes</h2>
+
+    @if(this.attributes){
+    @for(entry of this.attributes | keyvalue; track entry.key){
+    <div class="row">
+        <div class="key">{{entry.key}}</div>
+        <div class="value">{{entry.value}}</div>
+        <div class="actions">
+            <button mat-icon-button (click)="deleteAttribute(entry.key)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+    }
+    }
+
+    <div class="new-attribute-input">
+        <mat-form-field appearance="outline">
+            <input matInput [formControl]="newKeyControl" placeholder="New Key">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput [formControl]="newValueControl" placeholder="New Value">
+        </mat-form-field>
+    </div>
+    <button mat-stroked-button id="add-button" (click)="addAttribute()">Add Attribute <mat-icon>add</mat-icon></button>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="split-view">
+    <button mat-flat-button (click)="discardChanges()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="saveChanges()">Save Changes</button>
+</mat-dialog-actions>
