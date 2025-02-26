@@ -51,8 +51,10 @@ export class ProjectsComponent implements OnInit {
   handlePublishRequest(event: { topic: Topic, message: string, attributes: { [key: string]: string } }) {
     console.log("publish message request:", event.message)
 
+    const encoder = new TextEncoder()
+    const encoded = btoa(String.fromCharCode(...encoder.encode(event.message)))
     const pubsubMessage: PubsubMessage = {
-      data: btoa(event.message),
+      data: encoded,
       attributes: event.attributes
     }
 
