@@ -5,6 +5,7 @@ import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSuffix } from '@angular/material/form-field';
+import { StringDecoder } from 'string_decoder';
 
 @Component({
   selector: 'app-subscription-details',
@@ -39,11 +40,11 @@ export class SubscriptionDetailsComponent implements OnInit {
       })
   }
 
-  convertMessageData(b64data: string) {
-    console.log('doing translation on ', b64data)
-    const result = atob(b64data)
-    console.log(b64data, " -> ", result)
-    return result
+  convertMessageData(encodedInput: string) {
+    const binaryString = atob(encodedInput);
+    const uint8Array = new Uint8Array([...binaryString].map(char => char.charCodeAt(0)));
+    const decoder = new TextDecoder();
+    return decoder.decode(uint8Array);
   }
 
   printSomething(data: any) {

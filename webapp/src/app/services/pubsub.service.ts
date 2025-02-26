@@ -24,7 +24,7 @@ export class PubsubService {
 
   constructor() {
     const prevHost = localStorage.getItem("host")
-    if(prevHost){
+    if (prevHost) {
       console.log('loaded previous host', prevHost)
       this._currentHost$.next(prevHost)
     }
@@ -38,7 +38,7 @@ export class PubsubService {
     )
   }
 
-  setHost(hostUrl: string){
+  setHost(hostUrl: string) {
     this._currentHost$.next(hostUrl)
 
     localStorage.setItem("host", hostUrl)
@@ -58,7 +58,7 @@ export class PubsubService {
     localStorage.setItem("projects", jsonList)
   }
 
-  createTopic(projectId: string, topicId: string){
+  createTopic(projectId: string, topicId: string) {
     const url = `${this._currentHost$.value}/v1/projects/${projectId}/topics/${topicId}`
 
     return this.http.put<Topic>(url, {})
@@ -68,13 +68,13 @@ export class PubsubService {
     return this.http.get<{ topics: Topic[] }>(`${this._currentHost$.value}/v1/projects/${projectId}/topics`).pipe(map(incoming => incoming?.topics || []))
   }
 
-  createSubscription(projectId: string, request: NewSubscriptionRequest){
+  createSubscription(projectId: string, request: NewSubscriptionRequest) {
     const url = `${this._currentHost$.value}/v1/projects/${projectId}/subscriptions/${request.name}`
 
-    return this.http.put<Subscription>(url, {topic: request.topic, pushConfig: request.pushConfig})
+    return this.http.put<Subscription>(url, { topic: request.topic, pushConfig: request.pushConfig })
   }
 
-  deleteSubscription(subscriptionPath: string){
+  deleteSubscription(subscriptionPath: string) {
     const url = `${this._currentHost$.value}/v1/${subscriptionPath}`
     return this.http.delete(url)
   }
@@ -83,8 +83,8 @@ export class PubsubService {
     return this.http.get<{ subscriptions?: string[] }>(`${this._currentHost$.value}/v1/projects/${projectId}/subscriptions`)
       .pipe(
         map(incoming => incoming.subscriptions), // first we pull out the subscriptions object
-        map(subNames => subNames??[]),
-        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription)) ) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
+        map(subNames => subNames ?? []),
+        map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
       )
   }
 
@@ -95,12 +95,12 @@ export class PubsubService {
     return this.http.get<{ subscriptions?: string[] }>(url)
       .pipe(
         map(incoming => incoming.subscriptions),
-        map(subNames => subNames??[]),
+        map(subNames => subNames ?? []),
         map(subNames => subNames.map(name => ({ name, topic: 'undefined' } as Subscription))) // now we convert each string to a Subscription object (idk why, I think just wanted to learn rxjs mapping...)
       )
   }
 
-  getSubscriptionDetails(subscriptionPath: string){
+  getSubscriptionDetails(subscriptionPath: string) {
     const url = `${this._currentHost$.value}/v1/${subscriptionPath}`
     return this.http.get<Subscription>(url)
   }
@@ -113,14 +113,14 @@ export class PubsubService {
       ).pipe(map(incoming => incoming.receivedMessages ?? []))
   }
 
-  ackMessage(subscriptionPath:string, ackIds: string[]){
+  ackMessage(subscriptionPath: string, ackIds: string[]) {
     const url = `${this._currentHost$.value}/v1/${subscriptionPath}:acknowledge`
-    return this.http.post(url, {ackIds})
+    return this.http.post(url, { ackIds })
   }
 
-  publishMessages(topicPath: string, messages: PubsubMessage[]){
+  publishMessages(topicPath: string, messages: PubsubMessage[]) {
     const url = `${this._currentHost$.value}/v1/${topicPath}:publish`
-    return this.http.post<{messageIds: string[]}>(url, {messages})
+    return this.http.post<{ messageIds: string[] }>(url, { messages })
   }
 }
 
@@ -141,14 +141,14 @@ export interface ReceivedMessage {
 }
 
 export interface PubsubMessage {
-  data: string
+  data: string 
   attributes?: { [key: string]: string }
   messageId?: string
   publishTime?: string
   orderingKey?: string
 }
 
-export interface PushConfig{
+export interface PushConfig {
   pushEndpoint: string
-  attributes?: {[key: string]: string}
+  attributes?: { [key: string]: string }
 }
