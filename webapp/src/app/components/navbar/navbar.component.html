@@ -9,7 +9,7 @@
             </button>
             <h3>pubsub-ui</h3>
         </div>
-    
+
         <div class="config">
             <div class="links">
                 <button mat-icon-button (click)="updateHostUrl()">
@@ -17,7 +17,7 @@
                 </button>
 
                 @if (this.currentHost|async; as host) {
-                    <h4>current host: <a [href]="host">{{host}}</a></h4>
+                    <h4>current host: <a class="highlight" [href]="host">{{host}}</a></h4>
                 }
             </div>
         </div>
