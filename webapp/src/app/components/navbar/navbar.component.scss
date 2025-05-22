@@ -1,21 +1,22 @@
 .content {
-    width: 100%;
-    
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .links {
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 
-    align-items: center;
+  align-items: center;
+  color: orange;
 }
 
 button {
-    &:hover {
-        color: lightgreen;
-    }
+  &:hover {
+    color: lightgreen;
+  }
 }
