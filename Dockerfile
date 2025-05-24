@@ -6,6 +6,7 @@ RUN npm install
 RUN npm run build
 
 FROM nginx:alpine as serve
+RUN apk update && apk upgrade
 COPY scripts/docker/docker_nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /usr/share/nginx/html
