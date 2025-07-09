@@ -3,6 +3,16 @@
     <button mat-stroked-button color="accent" (click)="editAttributes()">
         Edit Attributes ({{this.attributeCount}})
     </button>
+    <div class="form-check mb-2">
+        <input 
+          class="form-check-input" 
+          type="checkbox" 
+          id="keepContentCheck" 
+          [(ngModel)]="keepContent">
+        <label class="form-check-label" for="keepContentCheck">
+          Keep text after publishing
+        </label>
+    </div>
     <button mat-raised-button color="primary" [disabled]="this.inputField.invalid" (click)="this.publishMessage()">
         Publish Message!
         <mat-icon>send</mat-icon>

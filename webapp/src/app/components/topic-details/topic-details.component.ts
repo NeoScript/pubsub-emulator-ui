@@ -23,6 +23,7 @@ export class TopicDetailsComponent implements OnInit {
 
   _dialog = inject(MatDialog)
   public inputField = new UntypedFormControl('', Validators.required)
+  public keepContent = false;
   attributes: { [key: string]: string } = {}
   attributeCount = 0
   constructor() { }
@@ -45,7 +46,9 @@ export class TopicDetailsComponent implements OnInit {
     console.log("this value was found", this.inputField.value)
 
     this.onMessagePublish.emit({ topic: this.topic!, message: this.inputField.value, attributes: this.attributes })
-    this.inputField.reset()
+    if (!this.keepContent) {
+      this.inputField.reset();
+    }
     this.attributes = {}
     this.attributeCount = 0
   }
