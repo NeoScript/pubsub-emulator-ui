@@ -5,7 +5,7 @@ import { PubsubService } from 'src/app/services/pubsub.service';
 import { InputDialogComponent } from '../input-dialog/input-dialog.component';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIconButton } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { AsyncPipe } from '@angular/common';
 
@@ -19,6 +19,7 @@ import { AsyncPipe } from '@angular/common';
 export class NavbarComponent implements OnInit {
   private pubsub = inject(PubsubService);
   private dialog = inject(MatDialog);
+  private router = inject(Router);
 
 
   currentHost: Observable<string>
@@ -36,6 +37,11 @@ export class NavbarComponent implements OnInit {
     ref.afterClosed().pipe(filter(result => !!result))
       .subscribe((result: { user_input: string }) => {
         this.pubsub.setHost(result.user_input)
+        
+        this.router.navigate([], {
+          queryParams: { host: result.user_input },
+          queryParamsHandling: 'merge'
+        });
       })
   }
 
