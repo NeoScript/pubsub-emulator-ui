@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, ActivatedRoute } from '@angular/router';
+import { PubsubService } from './services/pubsub.service';
 
 @Component({
     selector: 'app-root',
@@ -9,6 +10,17 @@ import { RouterOutlet } from '@angular/router';
     standalone: true,
     imports: [NavbarComponent, RouterOutlet]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'webapp';
+  private route = inject(ActivatedRoute);
+  private pubsub = inject(PubsubService);
+
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe(params => {
+      const host = params.get('host');
+      if (host) {
+        this.pubsub.setHost(host);
+      }
+    });
+  }
 }
