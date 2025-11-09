@@ -3,13 +3,23 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, EMPTY, map, Observable, ReplaySubject } from 'rxjs';
 import { NewSubscriptionRequest } from '../components/subscription-list/new-subscription-dialog/new-subscription-dialog.component';
 
+// Declare window.APP_CONFIG for runtime configuration
+declare global {
+  interface Window {
+    APP_CONFIG?: {
+      autoAttachPubsubProjects?: string;
+      defaultPubsubEmulatorHost?: string;
+    };
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PubsubService {
   private http = inject(HttpClient);
 
-  public _currentHost$ = new BehaviorSubject<string>("http://localhost:8681")
+  public _currentHost$ = new BehaviorSubject<string>("")
 
   private _projectList = new BehaviorSubject<string[]>([])
   private _currentProject = new ReplaySubject<string>()
@@ -23,19 +33,66 @@ export class PubsubService {
   public currentSubscription$ = this._currentSubscription.asObservable()
 
   constructor() {
+    let defaultHost = window.APP_CONFIG?.defaultPubsubEmulatorHost || ""
+    if (!defaultHost || defaultHost === '${DEFAULT_PUBSUB_EMULATOR_HOST}') {
+      defaultHost = "http://localhost:8681"
+    }
+
+    if (!defaultHost.match(/^http[s]?:\/\//)) {
+      defaultHost = `http://${defaultHost}`
+    }
+
     const prevHost = localStorage.getItem("host")
     if (prevHost) {
       console.log('loaded previous host', prevHost)
       this._currentHost$.next(prevHost)
+    } else {
+      console.log('loaded default host', defaultHost)
+      this._currentHost$.next(defaultHost)
     }
 
     const prevProjects = localStorage.getItem("projects") ?? "[]"
     const projects: string[] = JSON.parse(prevProjects) ?? []
-    this._projectList.next(projects)
+
+    // Auto-attach projects from environment variable (idempotent)
+    const autoAttachProjects = this.getAutoAttachProjects()
+    const mergedProjects = this.mergeProjectsIdempotently(projects, autoAttachProjects)
+
+    this._projectList.next(mergedProjects)
+
+    // Save merged list to localStorage if auto-attach added new projects
+    if (mergedProjects.length !== projects.length) {
+      localStorage.setItem("projects", JSON.stringify(mergedProjects))
+      console.log('auto-attached projects:', autoAttachProjects)
+    }
 
     this.currentProject$.subscribe(project =>
       this.topicList$ = this.listTopics(project)
     )
+  }
+
+  private getAutoAttachProjects(): string[] {
+    const autoAttachProjects = window.APP_CONFIG?.autoAttachPubsubProjects || ''
+    if (!autoAttachProjects || autoAttachProjects === "${AUTO_ATTACH_PUBSUB_PROJECTS}") {
+      return []
+    }
+
+    return autoAttachProjects
+      .split(',')
+      .map(project => project.trim())
+      .filter(project => project.length > 0)
+  }
+
+  private mergeProjectsIdempotently(existing: string[], autoAttach: string[]): string[] {
+    const merged = [...existing]
+
+    for (const project of autoAttach) {
+      if (!merged.includes(project)) {
+        merged.push(project)
+      }
+    }
+
+    return merged
   }
 
   setHost(hostUrl: string) {
@@ -141,7 +198,7 @@ export interface ReceivedMessage {
 }
 
 export interface PubsubMessage {
-  data: string 
+  data: string
   attributes?: { [key: string]: string }
   messageId?: string
   publishTime?: string
