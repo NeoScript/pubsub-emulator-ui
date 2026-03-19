@@ -7,8 +7,24 @@
 .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    gap: 8px;
+
+    .key {
+        flex-shrink: 0;
+        width: 40%;
+    }
+
+    .value {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .actions {
+        flex-shrink: 0;
+    }
 }
 
 .new-attribute-input {
@@ -24,4 +40,35 @@
     align-self: center;
     text-align: center;
     width: 100%;
+}
+
+.dialog-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.json-field {
+    width: 100%;
+
+    textarea {
+        min-height: 160px;
+        font-family: monospace;
+        font-size: 13px;
+    }
+}
+
+.json-error {
+    color: var(--mdc-theme-error, #f44336);
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+
+    code {
+        background: rgba(0, 0, 0, 0.06);
+        padding: 1px 4px;
+        border-radius: 3px;
+    }
 }

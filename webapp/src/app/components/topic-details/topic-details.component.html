@@ -3,6 +3,12 @@
     <button mat-stroked-button color="accent" (click)="editAttributes()">
         Edit Attributes ({{this.attributeCount}})
     </button>
+    @if(this.attributeCount > 0) {
+    <button mat-stroked-button color="warn" (click)="clearAttributes()">
+        Clear Attributes
+        <mat-icon>clear</mat-icon>
+    </button>
+    }
     <button mat-raised-button color="primary" [disabled]="this.inputField.invalid" (click)="this.publishMessage()">
         Publish Message!
         <mat-icon>send</mat-icon>

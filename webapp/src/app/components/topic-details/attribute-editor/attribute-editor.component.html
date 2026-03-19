@@ -1,7 +1,13 @@
 <mat-dialog-content>
-    <h2>Message Attributes</h2>
+    <div class="dialog-header">
+        <h2>Message Attributes</h2>
+        <button mat-stroked-button (click)="toggleJsonMode()">
+            {{ jsonMode ? 'Key-Value' : 'JSON' }}
+            <mat-icon>{{ jsonMode ? 'list' : 'data_object' }}</mat-icon>
+        </button>
+    </div>
 
-    @if(this.attributes){
+    @if(!jsonMode) {
     @for(entry of this.attributes | keyvalue; track entry.key){
     <div class="row">
         <div class="key">{{entry.key}}</div>
@@ -12,7 +18,6 @@
             </button>
         </div>
     </div>
-    }
     }
 
     <div class="new-attribute-input">
@@ -25,10 +30,20 @@
         </mat-form-field>
     </div>
     <button mat-stroked-button id="add-button" (click)="addAttribute()">Add Attribute <mat-icon>add</mat-icon></button>
+    } @else {
+    <mat-form-field appearance="outline" class="json-field">
+        <textarea matInput [formControl]="jsonInput" placeholder='{"key": "value"}'></textarea>
+    </mat-form-field>
+    @if(jsonError) {
+    <div class="json-error">Invalid JSON — must be an object with string values, e.g.
+        <code>{{ '{' }}"key": "value"{{ '}' }}</code></div>
+    }
+    }
 
 </mat-dialog-content>
 
 <mat-dialog-actions class="split-view">
     <button mat-flat-button (click)="discardChanges()">Cancel</button>
+    <button mat-stroked-button color="warn" (click)="clearAll()">Clear All <mat-icon>clear_all</mat-icon></button>
     <button mat-raised-button color="primary" (click)="saveChanges()">Save Changes</button>
 </mat-dialog-actions>
